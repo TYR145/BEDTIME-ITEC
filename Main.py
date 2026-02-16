@@ -1,4 +1,6 @@
 def Collecting_Game():
+    end = False
+    
     import pygame
     import sys
     import os
@@ -91,8 +93,14 @@ def Collecting_Game():
             if event.type == pygame.QUIT:
                 end = True
 
+
             # start movement on key press (moves by 1 space)
             if event.type == pygame.KEYDOWN:
+                # EXIT KEY
+                if event.key == pygame.K_ESCAPE: 
+                    end = True
+
+
                 # arrow keys
                 if event.key == pygame.K_LEFT and moveleft == True:
                     player_dx = -player_speed #-->dx is CHANGING (-speed to go LEFT)
@@ -185,6 +193,8 @@ def Collecting_Game():
 
         pygame.display.flip()
         clock.tick(FPS)
+
+
 
     # Quit Pygame
     pygame.quit()
