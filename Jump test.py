@@ -20,7 +20,7 @@ BLUE = (0, 0, 255)
 #-------------------------------------------------------------------
 # --- Initialize Jump & Player variables --- 
 # Player
-player_rect = pygame.Rect(WIDTH // 2, HEIGHT // 2, 30, 30)
+player_rect = pygame.Rect(WIDTH // 2, HEIGHT // 2, 30, 30) # Defining the player's rectangle
 player_dx = 0 #--> "difference in X" (starts @ 0 bc it's not moving at first)
 player_dy = 0 #--> "difference in Y"
 player_speed = 4
@@ -56,7 +56,7 @@ while not end:
                 # Changing the jump & player values
                 jump = True
                 initial_y = player_rect.y
-        # --- Handle Key Presses (KEYDOWN) ---
+        # --- Handle Key Presses (KEYUP) ---
         if event.type == pygame.KEYUP:
             if event.key in (pygame.K_LEFT, pygame.K_RIGHT):
                 player_dx = 0

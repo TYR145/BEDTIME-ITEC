@@ -20,9 +20,6 @@ def Collecting_Game():
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
 
-    #Defining Objects
-    # bg_image = pygame.image.load(os.path.join("images", "testbg.webp"))
-    player_image = pygame.image.load(os.path.join("images","emoji1.png"))
 
     #Tracking for emoji's visible
     emoji1_visible = True
