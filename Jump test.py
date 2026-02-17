@@ -13,6 +13,7 @@ clock = pygame.time.Clock()
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
+BLUE = (0, 0, 255)
 
 #-------------------------------------------------------------------
 # MAIN GAME LOOP
@@ -23,6 +24,11 @@ player_rect = pygame.Rect(WIDTH // 2, HEIGHT // 2, 30, 30)
 player_dx = 0 #--> "difference in X" (starts @ 0 bc it's not moving at first)
 player_dy = 0 #--> "difference in Y"
 player_speed = 4
+
+# OPPS 
+opp_rect = pygame.Rect(WIDTH // 2, HEIGHT // 2, 30, 30, 30)
+opp_x = 0
+opp_y = 0
 
 # JUMP
 jump = False
@@ -46,7 +52,7 @@ while not end:
                 player_dx = player_speed
 
             #JUMP
-            if event.key == pygame.K_SPACE:
+            if event.key == pygame.K_UP:
                 # Changing the jump & player values
                 jump = True
                 initial_y = player_rect.y
@@ -57,7 +63,7 @@ while not end:
                 
     # JUMPING LOGIC
     if jump == True:
-        player_rect.y -= 6
+        player_rect.y -= 7
         if player_rect.y <= initial_y - 70:
             jump = False
     else: 
@@ -70,6 +76,10 @@ while not end:
     #--------------------------#DRAW:-------------------------------
     screen.fill(BLACK)
     pygame.draw.rect(screen, WHITE, player_rect)
+
+    pygame.draw.rect(screen, BLUE, opp_rect)
+
+
     pygame.display.flip()
     clock.tick(FPS)
 

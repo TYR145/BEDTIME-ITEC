@@ -171,6 +171,7 @@ def Collecting_Game():
 
 
         screen.blit(background, (0, 0))  # draw background Image ("Block Image Transfer" = blit)
+        
         # B. draw player
         screen.blit(player_image, (player_x, player_y))  # draw player
         if emoji1_visible == True:
