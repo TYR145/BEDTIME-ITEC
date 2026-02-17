@@ -83,44 +83,40 @@ def Collecting_Game():
     moveright = True
 
     while not end:
-        if game_over: 
-            GameOver_screen() 
-            continue
-
-
         # A. Event handling: Check for user input
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 end = True
 
-
-            # start movement on key press (moves by 1 space)
-            if event.type == pygame.KEYDOWN:
+        # start movement on key press (moves by 1 space)
+        if event.type == pygame.KEYDOWN:
                 # EXIT KEY
-                if event.key == pygame.K_ESCAPE: 
-                    end = True
-
-
-                # arrow keys
-                if event.key == pygame.K_LEFT and moveleft == True:
-                    player_dx = -player_speed #-->dx is CHANGING (-speed to go LEFT)
-                if event.key == pygame.K_RIGHT and moveright == True: #-->dx is CHANGING (+speed to go RIGHT)
-                    player_dx = player_speed
-                if event.key == pygame.K_UP and moveup == True:
-                    player_dy = -player_speed #--> (-y is GOING UP)
-                if event.key == pygame.K_DOWN and movedown == True: #--> (+y is GOING DOWN)
-                    player_dy = player_speed
-                # Escape key 
-                if event.key == pygame.K_ESCAPE:
-                    end = True
+            if event.key == pygame.K_ESCAPE: 
+                end = True
+                
+            # arrow keys
+            if event.key == pygame.K_LEFT and moveleft == True:
+                player_dx = -player_speed #-->dx is CHANGING (-speed to go LEFT)
+            if event.key == pygame.K_RIGHT and moveright == True: #-->dx is CHANGING (+speed to go RIGHT)
+                player_dx = player_speed
+            if event.key == pygame.K_UP and moveup == True:
+                player_dy = -player_speed #--> (-y is GOING UP)
+            if event.key == pygame.K_DOWN and movedown == True: #--> (+y is GOING DOWN)
+                player_dy = player_speed
 
             # end movement on key release
-            if event.type == pygame.KEYUP:
-                if event.key in (pygame.K_LEFT, pygame.K_RIGHT):
-                    player_dx = 0
-                if event.key in (pygame.K_UP, pygame.K_DOWN):
-                    player_dy = 0
+        if event.type == pygame.KEYUP:
+            if event.key in (pygame.K_LEFT, pygame.K_RIGHT):
+                player_dx = 0
+            if event.key in (pygame.K_UP, pygame.K_DOWN):
+                player_dy = 0
 
+        if game_over:
+            GameOver_screen()
+            # Skip game logic, but DO NOT skip event handling
+            pygame.display.flip()
+            clock.tick(FPS)
+            continue
 
     #to check if player exists boundaries
         if player_x <= 0:
