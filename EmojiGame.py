@@ -15,8 +15,6 @@ def Collecting_Game():
     pygame.display.set_caption("Pygame Emoji Game Jam")
     clock = pygame.time.Clock()
 
-    #While game condition !!!!
-
 
     #Defining colours 
     BLACK = (0, 0, 0)
