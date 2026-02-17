@@ -21,7 +21,7 @@ def Collecting_Game():
     WHITE = (255, 255, 255)
 
     #Defining Objects
-    bg_image = pygame.image.load(os.path.join("images", "testbg.webp"))
+    # bg_image = pygame.image.load(os.path.join("images", "testbg.webp"))
     player_image = pygame.image.load(os.path.join("images","emoji1.png"))
 
     #Tracking for emoji's visible
@@ -80,6 +80,7 @@ def Collecting_Game():
     movedown = True
     moveright = True
 
+    # GAME LOOP --> keeps game window open!!
     while not end:
         # A. Event handling: Check for user input
         for event in pygame.event.get():

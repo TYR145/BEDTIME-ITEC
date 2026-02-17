@@ -17,12 +17,46 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 BLUE = (0, 0, 255)
 
-#Adding BG Images
-background = pygame.image.load(os.path.join("MovementImages, OpenBG.jpg"))
+# ====================
+#      IMAGES
+# ====================
 
-# DRAWING
-screen.blit(background, (0, 0))
-background = pygame.transform.scale(background, (WIDTH, HEIGHT)) #--> Refreshes the background
+# Adding BG Images
+background = pygame.image.load(os.path.join("ProjectImages", "OpenBG.jpg"))
+background = pygame.transform.scale(background, (WIDTH, HEIGHT))
+
+# Player
+#player_image = pygame.image.load(os.path.join("images","Steve.png"))
+#player_image = pygame.transform.scale(player_image, (64, 64))
+
+
+# Enemies
+
+# Obstacles
+
+
+# ====================
+#      GAME LOOP
+# ====================
+end = False
+
+while not end:
+    # Event handling: Check for user input
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            end = True
+
+    # EXIT KEY - "Esc"
+    if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE: 
+                end = True
+
+    # DISPLAYS IMAGE -- INSIDE the WHILE LOOP
+    screen.blit(background, (0, 0)) #--> BLIT AFTER scaling image
+    pygame.display.flip()
+    clock.tick(FPS)
+
+
 """
 # player image
 player_image = pygame.image.load("prince.gif")
