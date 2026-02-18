@@ -26,7 +26,7 @@ player_dy = 0 #--> "difference in Y"
 player_speed = 4
 
 # OPPS 
-opp_rect = pygame.Rect(WIDTH // 2, HEIGHT // 2, 30, 30, 30)
+opp_rect = pygame.Rect(WIDTH // 2, HEIGHT // 2, 30, 30)
 opp_x = 0
 opp_y = 0
 
@@ -63,12 +63,12 @@ while not end:
                 
     # JUMPING LOGIC
     if jump == True:
-        player_rect.y -= 7
+        player_rect.y -= 15
         if player_rect.y <= initial_y - 70:
             jump = False
     else: 
         if player_rect.y < initial_y: #Don't do <= bc then movement will be choppy
-            player_rect.y += 6 # go down
+            player_rect.y += 4 # go down
 
     player_rect.x += player_dx
     player_rect.y += player_dy

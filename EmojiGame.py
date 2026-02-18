@@ -143,6 +143,8 @@ def Collecting_Game():
         player_x += player_dx 
         player_y += player_dy
 
+        # BORDER COLLISION
+
         p_rec = pygame.Rect(player_x, player_y, player_image.get_width(),player_image.get_height())
         e1_rect = pygame.Rect(180,40, emoji1_image.get_width(),emoji1_image.get_height())
         e2_rect = pygame.Rect(425,147, emoji2_image.get_width(),emoji2_image.get_height())
