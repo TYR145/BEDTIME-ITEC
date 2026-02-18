@@ -5,8 +5,8 @@ import os
 #-------------------------------------------------------------------
 pygame.init()
 
-# SCREEN DIMENSIONS
-WIDTH, HEIGHT = 640, 480
+# SCREEN DIMENSIONSss
+WIDTH, HEIGHT = 640, 580
 FPS = 60 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Moving Pictures Test")
@@ -199,7 +199,7 @@ while not end:
         screen.blit(wc4, wc4_rect)
 
     # DRAWING Exit Star
-    es_rect.topleft = (400, 300)
+    es_rect.topleft = (player_x, player_y)
     if es_visible == True:
         screen.blit(es, es_rect)
     
