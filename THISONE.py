@@ -60,24 +60,31 @@ p_rect = pygame.Rect(player_x, player_y, player_image.get_width(),player_image.g
 # ---------------------------------------------------------------------
 # Obstacles
 
-# Yellow Circles - POINTS
-yc1 = pygame.image.load(os.path.join("ProjectImages", "yellow_circle.png"))
-yc1 = pygame.transform.smoothscale(yc1, (40,40)) #--> DIMENSIONS
+# White Circles - POINTS
+wc1 = pygame.image.load(os.path.join("ProjectImages", "w_circle.png"))
+wc1 = pygame.transform.smoothscale(wc1, (40,40)) #--> DIMENSIONS
 
-yc2 = pygame.image.load(os.path.join("ProjectImages", "yellow_circle.png"))
-yc2 = pygame.transform.smoothscale(yc2, (40,40))
+wc2 = pygame.image.load(os.path.join("ProjectImages", "w_circle.png"))
+wc2 = pygame.transform.smoothscale(wc2, (40,40))
 
-yc3 = pygame.image.load(os.path.join("ProjectImages", "yellow_circle.png"))
-yc3 = pygame.transform.smoothscale(yc3, (40,40))
+wc3 = pygame.image.load(os.path.join("ProjectImages", "w_circle.png"))
+wc3 = pygame.transform.smoothscale(wc3, (40,40))
 
-yc4 = pygame.image.load(os.path.join("ProjectImages", "yellow_circle.png"))
-yc4 = pygame.transform.smoothscale(yc4, (40,40))
+wc4 = pygame.image.load(os.path.join("ProjectImages", "w_circle.png"))
+wc4 = pygame.transform.smoothscale(wc4, (40,40))
 
-#YELLOW CIRCLE Rects
-yc1_rect = pygame.Rect(40,140, yc1.get_width(),yc1.get_height())
-yc2_rect = pygame.Rect(350,240, yc2.get_width(),yc2.get_height())
-yc3_rect = pygame.Rect(150,370, yc3.get_width(),yc3.get_height())
-yc4_rect = pygame.Rect(550,67, yc4.get_width(),yc4.get_height())
+# White Circle - RECTS
+wc1_rect = pygame.Rect(40,140, wc1.get_width(),wc1.get_height())
+wc2_rect = pygame.Rect(350,240, wc2.get_width(),wc2.get_height())
+wc3_rect = pygame.Rect(150,370, wc3.get_width(),wc3.get_height())
+wc4_rect = pygame.Rect(550,67, wc4.get_width(),wc4.get_height())
+
+#----------------------------------------------------------------------
+# Exit Star Image
+es = pygame.image.load(os.path.join("ProjectImages", "exit_star.png"))
+es = pygame.transform.smoothscale(es, (40,40))
+#Rect --> for collision
+es_rect = es.get_rect()
 # ---------------------------------------------------------------------
 
 # ====================
@@ -85,14 +92,24 @@ yc4_rect = pygame.Rect(550,67, yc4.get_width(),yc4.get_height())
 # ====================
 end = False
 
-yc1_visible = True
-yc2_visible = True
-yc3_visible= True
-yc4_visible = True
+# White Circles
+wc1_visible = True
+wc2_visible = True
+wc3_visible= True
+wc4_visible = True
+# Function tracking if circles are collected
+def CirclesCollected(): #--> Creating a FUNCTION to check if all are collected
+    return (not wc1_visible and not wc2_visible and not wc3_visible and not wc4_visible)
+
+
+# Exit Stars
+es_visible = False
+
 
 # Player movement Variables
 player_dx = 0 #--> Direction x
 player_dy = 0 #--> Direction y
+
 
 while not end:
     # Event handling: Check for user input
@@ -135,10 +152,6 @@ while not end:
     p_rect.y += player_dy
 
 
-    # Points Visible
-
-
-
     # BORDER COLLISION --> use < & > adds flexibility, to snap ONLY if player is too far
     if p_rect.left < 6:
         p_rect.left = 6
@@ -155,29 +168,40 @@ while not end:
     #----------------------------
     # Collecting Points Updates
     #----------------------------
-    # COLLISION DETECTION of Yellow Circles
-    if p_rect.colliderect(yc1_rect):
-            yc1_visible = False
-    if p_rect.colliderect(yc2_rect):
-            yc2_visible = False
-    if p_rect.colliderect(yc3_rect):
-            yc3_visible = False
-    if p_rect.colliderect(yc4_rect):
-            yc4_visible = False
+    # COLLISION DETECTION of White Circles
+    if p_rect.colliderect(wc1_rect):
+        wc1_visible = False
+    if p_rect.colliderect(wc2_rect):
+        wc2_visible = False
+    if p_rect.colliderect(wc3_rect):
+        wc3_visible = False
+    if p_rect.colliderect(wc4_rect):
+        wc4_visible = False
+    
+    if CirclesCollected():
+        es_visible = True
+    # Checks to end if Star is visible & Player touching the Star's rect 
+    if es_visible and p_rect.colliderect(es_rect):
+        end = True
 
     # Descending Order -- Which images get drawn first
     screen.blit(background, (0, 0))       # Draw BG FIRST
     screen.blit(player_currentD, p_rect)  # Draw player
 
-    # DRAWING yellow circles --> PLACEMENT & VISIBILITY
-    if yc1_visible == True:
-        screen.blit(yc1, yc1_rect)
-    if yc2_visible == True:
-        screen.blit(yc2, yc2_rect)
-    if yc3_visible == True:
-        screen.blit(yc3, yc3_rect)
-    if yc4_visible == True:
-        screen.blit(yc4, yc4_rect)
+    # DRAWING White Circles --> PLACEMENT & VISIBILITY
+    if wc1_visible == True:
+        screen.blit(wc1, wc1_rect)
+    if wc2_visible == True:
+        screen.blit(wc2, wc2_rect)
+    if wc3_visible == True:
+        screen.blit(wc3, wc3_rect)
+    if wc4_visible == True:
+        screen.blit(wc4, wc4_rect)
+
+    # DRAWING Exit Star
+    es_rect.topleft = (400, 300)
+    if es_visible == True:
+        screen.blit(es, es_rect)
     
 
 
