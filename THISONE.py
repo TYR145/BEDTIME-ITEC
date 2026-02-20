@@ -6,10 +6,10 @@ import os
 pygame.init()
 
 # SCREEN DIMENSIONSss
-WIDTH, HEIGHT = 640, 580
+WIDTH, HEIGHT = 650, 450
 FPS = 60 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Moving Pictures Test")
+pygame.display.set_caption("Maze Mechanics - BETA")
 clock = pygame.time.Clock()
 
 # COLOURS
@@ -17,10 +17,17 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 BLUE = (0, 0, 255)
 
+"""
+ADD OBSTACLES BETWEEN?? 
+--> enemies or just a maze like as planned... once I know how lol
 
-# ====================
-#      IMAGES --- ADD PLAYER IMAGE RECT FOR BORDER COLLISION
-# ====================
+ADD ending image??? Idk
+--> figure out how to make new message appear when you touch exit star
+"""
+
+# ===========================================================
+#      ADDING IMAGES --- ADD IMAGE RECT FOR BORDER COLLISION
+# ===========================================================
 
 # Adding BG Images
 background = pygame.image.load(os.path.join("ProjectImages", "OpenBG.jpg"))
@@ -32,7 +39,7 @@ player_image = pygame.image.load(os.path.join("ProjectImages","Arrow_R.png"))
 player_image = pygame.transform.smoothscale(player_image, (55, 55))
 
 
-# Player DIRECTION SPRITES & Scale Images --> use "smoothscale()" to smooth edges
+# PLAYER Directional Sprites & Image scaling --> use "smoothscale()" to smooth edges
 player_Left = pygame.image.load(os.path.join("ProjectImages", "Arrow_L.png"))
 player_Left = pygame.transform.smoothscale(player_Left, (55, 55)) 
 
@@ -53,43 +60,68 @@ player_speed = 6
 
 # Player Rect --> needed for border collision
 p_rect = pygame.Rect(player_x, player_y, player_image.get_width(),player_image.get_height())
-# ---------------------------------------------------------------------
+#----------------------------------------------------------------------
 
-# Enemies
 
-# ---------------------------------------------------------------------
-# Obstacles
 
-# White Circles - POINTS
+# OBJECTS
+
+# White Circles - POINTS & RECTS (Will change for individual toys)
 wc1 = pygame.image.load(os.path.join("ProjectImages", "w_circle.png"))
-wc1 = pygame.transform.smoothscale(wc1, (40,40)) #--> DIMENSIONS
+wc1 = pygame.transform.smoothscale(wc1, (30,30)) #--> DIMENSION SCALING
 
 wc2 = pygame.image.load(os.path.join("ProjectImages", "w_circle.png"))
-wc2 = pygame.transform.smoothscale(wc2, (40,40))
+wc2 = pygame.transform.smoothscale(wc2, (30,30))
 
 wc3 = pygame.image.load(os.path.join("ProjectImages", "w_circle.png"))
-wc3 = pygame.transform.smoothscale(wc3, (40,40))
+wc3 = pygame.transform.smoothscale(wc3, (30,30))
 
 wc4 = pygame.image.load(os.path.join("ProjectImages", "w_circle.png"))
-wc4 = pygame.transform.smoothscale(wc4, (40,40))
+wc4 = pygame.transform.smoothscale(wc4, (30,30))
 
-# White Circle - RECTS
-wc1_rect = pygame.Rect(40,140, wc1.get_width(),wc1.get_height())
+wc1_rect = pygame.Rect(40,140, wc1.get_width(),wc1.get_height()) #-->(x,y) placements of points
 wc2_rect = pygame.Rect(350,240, wc2.get_width(),wc2.get_height())
 wc3_rect = pygame.Rect(150,370, wc3.get_width(),wc3.get_height())
 wc4_rect = pygame.Rect(550,67, wc4.get_width(),wc4.get_height())
 
-#----------------------------------------------------------------------
-# Exit Star Image
-es = pygame.image.load(os.path.join("ProjectImages", "exit_star.png"))
-es = pygame.transform.smoothscale(es, (40,40))
-#Rect --> for collision
-es_rect = es.get_rect()
-# ---------------------------------------------------------------------
 
-# ====================
-#      GAME LOOP
-# ====================
+
+# Defining Obstacles --> Put inside def Function idk....)
+def create_obstacles():
+    # 1. Create an empty list to add obstacles to
+    obstacles = []
+    
+    # 2. Define images & Scaling them
+    obs_img = pygame.image.load(os.path.join("Project Images", "obstacle.png"))
+    obs_img = pygame.transform.smoothscale(obs_img, (45,45))
+
+    # 3. Creating separate rects for Obstacle object collision
+    obs_rect1 = obs_img.get_rect(topleft=(350,350)) #--> (x,y) placement of obstacles
+    obs_rect2 = obs_img.get_rect(topleft=(240,300))
+    obs_rect3 = obs_img.get_rect(topleft=(100,100))
+    obs_rect4 = obs_img.get_rect(topleft=(530,400))
+
+    # 4. Add obstacles to list [] --> use .append to apply rect & img
+    obstacles.append((obs_img, obs_rect1))
+    obstacles.append((obs_img, obs_rect2))
+    obstacles.append((obs_img, obs_rect3))
+    obstacles.append((obs_img, obs_rect4))
+
+    # 5. return the value of "obstacle"
+    return obstacles
+obstacles = create_obstacles() # 6. Calls back the function
+
+# Defining Exit Star Image
+eStar = pygame.image.load(os.path.join("ProjectImages", "exit_star.png"))
+eStar = pygame.transform.smoothscale(eStar, (40,40))
+#Rect --> for collision
+eStar_rect = eStar.get_rect()
+
+
+
+# ======================
+#      GAME LOOP LOGIC
+# ======================
 end = False
 
 # White Circles
@@ -101,9 +133,8 @@ wc4_visible = True
 def CirclesCollected(): #--> Creating a FUNCTION to check if all are collected
     return (not wc1_visible and not wc2_visible and not wc3_visible and not wc4_visible)
 
-
-# Exit Stars
-es_visible = False
+# Exit Star
+eStar_visible = False
 
 
 # Player movement Variables
@@ -151,6 +182,9 @@ while not end:
     p_rect.x += player_dx 
     p_rect.y += player_dy
 
+    """
+    Obstacle placemnt defined in def Obstacles()
+    """
 
     # BORDER COLLISION --> use < & > adds flexibility, to snap ONLY if player is too far
     if p_rect.left < 6:
@@ -165,9 +199,7 @@ while not end:
     if p_rect.right > WIDTH - 7:
         p_rect.right = WIDTH - 7
 
-    #----------------------------
-    # Collecting Points Updates
-    #----------------------------
+
     # COLLISION DETECTION of White Circles
     if p_rect.colliderect(wc1_rect):
         wc1_visible = False
@@ -179,16 +211,21 @@ while not end:
         wc4_visible = False
     
     if CirclesCollected():
-        es_visible = True
+        eStar_visible = True
     # Checks to end if Star is visible & Player touching the Star's rect 
-    if es_visible and p_rect.colliderect(es_rect):
+    if eStar_visible and p_rect.colliderect(eStar_rect):
         end = True
+
+
+# ======================
+#      DRAWING
+# ======================
 
     # Descending Order -- Which images get drawn first
     screen.blit(background, (0, 0))       # Draw BG FIRST
     screen.blit(player_currentD, p_rect)  # Draw player
 
-    # DRAWING White Circles --> PLACEMENT & VISIBILITY
+    # Drawing POINTS --> PLACEMENT & VISIBILITY
     if wc1_visible == True:
         screen.blit(wc1, wc1_rect)
     if wc2_visible == True:
@@ -197,11 +234,21 @@ while not end:
         screen.blit(wc3, wc3_rect)
     if wc4_visible == True:
         screen.blit(wc4, wc4_rect)
+    
+    # Drawing Obstacles --> use "for-in" loops to iterate through lists
+    for obs_img, rect in obstacles: #--> obs_rec & img are vars defined in obstacles function
+        screen.blit(obs_img, rect)
+
+        #--> Add if to detect IF PLAYER touches the object
+        #--> still call it "rect" bc detecting the object TYPE
+        if p_rect.colliderect(rect):
+            p_rect.x -= player_dx # Collision to bounce player BACk (-=) for X
+            p_rect.y -= player_dy # Collision ``` BACK `` for y
 
     # DRAWING Exit Star
-    es_rect.topleft = (player_x, player_y)
-    if es_visible == True:
-        screen.blit(es, es_rect)
+    eStar_rect.topleft = (player_x, player_y)
+    if eStar_visible == True:
+        screen.blit(eStar, eStar_rect)
     
 
 
