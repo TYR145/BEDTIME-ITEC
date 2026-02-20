@@ -36,21 +36,21 @@ background = pygame.transform.smoothscale(background, (WIDTH, HEIGHT))
 # ---------------------------------------------------------------------
 # Player
 player_image = pygame.image.load(os.path.join("ProjectImages","Arrow_R.png"))
-player_image = pygame.transform.smoothscale(player_image, (55, 55))
+player_image = pygame.transform.smoothscale(player_image, (35, 35))
 
 
 # PLAYER Directional Sprites & Image scaling --> use "smoothscale()" to smooth edges
 player_Left = pygame.image.load(os.path.join("ProjectImages", "Arrow_L.png"))
-player_Left = pygame.transform.smoothscale(player_Left, (55, 55)) 
+player_Left = pygame.transform.smoothscale(player_Left, (35, 35)) 
 
 player_Right = pygame.image.load(os.path.join("ProjectImages", "Arrow_R.png"))
-player_Right = pygame.transform.smoothscale(player_Right, (55, 55))
+player_Right = pygame.transform.smoothscale(player_Right, (35, 35))
 
 player_Up = pygame.image.load(os.path.join("ProjectImages", "Arrow_U.png"))
-player_Up = pygame.transform.smoothscale(player_Up, (55, 55))
+player_Up = pygame.transform.smoothscale(player_Up, (35, 35))
 
 player_Down = pygame.image.load(os.path.join("ProjectImages", "Arrow_D.png"))
-player_Down = pygame.transform.smoothscale(player_Down, (55, 55))
+player_Down = pygame.transform.smoothscale(player_Down, (35, 35))
 
 # Player's location and speed
 player_currentD = player_Right # SETS CURRENT DIRECTION SPRITE
@@ -92,21 +92,44 @@ def create_obstacles():
     obstacles = []
     
     # 2. Define images & Scaling them
-    obs_img = pygame.image.load(os.path.join("Project Images", "obstacle.png"))
+    obs_img = pygame.image.load(os.path.join("ProjectImages", "obstacle.png"))
     obs_img = pygame.transform.smoothscale(obs_img, (45,45))
 
-    # 3. Creating separate rects for Obstacle object collision
-    obs_rect1 = obs_img.get_rect(topleft=(350,350)) #--> (x,y) placement of obstacles
-    obs_rect2 = obs_img.get_rect(topleft=(240,300))
-    obs_rect3 = obs_img.get_rect(topleft=(100,100))
-    obs_rect4 = obs_img.get_rect(topleft=(530,400))
+    """
+    TO DO:
+    - REARRANGE OBSTACLE COORDINATES
+    - ADD MOVING OBSTACLES --> touch = "die"? (i.e. "marbles", those wind up toys etc.)
+    """
+    # 3. Adding coordinates
+    obs_coords = [
+        # blocks exit star path 
+        (10, 200),
+
+        # TOP ROOM 
+        (120, 70), (260, 75), (400, 80),
+
+        # UPPER MID
+        (150, 130), (230, 140), (310, 135), (390, 145), (470, 130),
+
+
+        # near wc1 
+        (90, 160), (160, 150),
+
+        # near wc2 
+        (300, 220), (380, 260), (330, 300),
+
+        # near wc3 
+        (140, 330), (210, 360), (260, 310),
+
+        # MID ROOM 
+        (250, 200), (290, 260)
+    ]
 
     # 4. Add obstacles to list [] --> use .append to apply rect & img
-    obstacles.append((obs_img, obs_rect1))
-    obstacles.append((obs_img, obs_rect2))
-    obstacles.append((obs_img, obs_rect3))
-    obstacles.append((obs_img, obs_rect4))
-
+    for x, y in obs_coords:
+        rect = obs_img.get_rect(topleft=(x,y)) #--> adds obstacle objects
+        obstacles.append((obs_img, rect))#--> also adds images & rects
+    
     # 5. return the value of "obstacle"
     return obstacles
 obstacles = create_obstacles() # 6. Calls back the function
