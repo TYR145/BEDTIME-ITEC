@@ -27,21 +27,21 @@ def Collecting_Game():
     emoji3_visible = True
 
     # Load and scale background image & reload the background
-    background = pygame.image.load(os.path.join("images","testbg.webp")) #--> loads an image instead of a rectangle
+    background = pygame.image.load(os.path.join("References","images","testbg.webp")) #--> loads an image instead of a rectangle
     background = pygame.transform.scale(background, (WIDTH, HEIGHT)) #--> Refreshes the background
 
     # player image
-    player_image = pygame.image.load(os.path.join("images","Steve.png"))
+    player_image = pygame.image.load(os.path.join("References", "images","Steve.png"))
     player_image = pygame.transform.scale(player_image, (64, 64))
 
 
     # emoji images
-    emoji1_image = pygame.image.load(os.path.join("images","emoji1.png"))
-    emoji2_image = pygame.image.load(os.path.join("images","emoji2.png"))
-    emoji3_image = pygame.image.load(os.path.join("images","emoji3.png"))
+    emoji1_image = pygame.image.load(os.path.join("References", "images","emoji1.png"))
+    emoji2_image = pygame.image.load(os.path.join("References", "images","emoji2.png"))
+    emoji3_image = pygame.image.load(os.path.join("References", "images","emoji3.png"))
 
     #GameOver image
-    GameOver_image = pygame.image.load(os.path.join("images","GameOver.png"))
+    GameOver_image = pygame.image.load(os.path.join("References", "images","GameOver.png"))
     GameOver_image = pygame.transform.scale(GameOver_image, (WIDTH, HEIGHT))
 
     # player location and speed

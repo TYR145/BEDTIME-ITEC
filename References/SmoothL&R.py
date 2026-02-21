@@ -23,13 +23,13 @@ clock = pygame.time.Clock()
 #<<---------------------------------------------------------
 # background image
 # Load and scale background image
-background = pygame.image.load("map.jpg") #--> loads an image instead of a rectangle
+background = pygame.image.load("References/map.jpg") #--> loads an image instead of a rectangle
 
 # player image
-player_image = pygame.image.load("prince.gif")
+player_image = pygame.image.load("References/prince.gif")
 
 # New character image
-enemy_image = pygame.image.load("green.png")
+enemy_image = pygame.image.load("References/green.png")
 
 #>>---------------------------------------------------------
 # player location and speed
