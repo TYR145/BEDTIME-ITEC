@@ -1,7 +1,5 @@
 """
 Buttons in pygame: https://thepythoncode.com/article/make-a-button-using-pygame-in-python
-
-WIP:
 """
 
 import pygame
