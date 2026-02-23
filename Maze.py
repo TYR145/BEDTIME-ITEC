@@ -238,6 +238,7 @@ while not end:
     # Checks to end if Star is visible & Player touching the Star's rect 
     if eStar_visible and p_rect.colliderect(eStar_rect):
         end = True
+        print("You won!")
 
 
 # ======================

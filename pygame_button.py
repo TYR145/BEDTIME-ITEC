@@ -75,15 +75,17 @@ screen = pygame.display.set_mode((400, 300))
 #====================
 
 # Creating the sprite
-sprite = ClickableSprite(pygame.Surface((100, 100)), 50, 50, on_click)
-group = pygame.sprite.GroupSingle(sprite)
+def create_sprite():
+    sprite = ClickableSprite(pygame.Surface((100, 100)), 50, 50, on_click)
+    group = pygame.sprite.GroupSingle(sprite)
 
-running = True
-while running:
-    events = pygame.event.get()
-    for event in events:
-        if event.type == pygame.QUIT:
-            running = False
+    running = True
+    while running:
+        events = pygame.event.get()
+        for event in events:
+            if event.type == pygame.QUIT:
+                running = False
+
 
     group.update(events)
     screen.fill((255, 255, 255))
