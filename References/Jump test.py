@@ -32,6 +32,7 @@ opp_y = 0
 
 # JUMP
 jump = False
+fall = False
 initial_y = player_rect.y
 
 end = False
@@ -53,9 +54,10 @@ while not end:
 
             #JUMP
             if event.key == pygame.K_UP:
-                # Changing the jump & player values
-                jump = True
-                initial_y = player_rect.y
+                if jump == False and fall == False:
+                    # Changing the jump & player values
+                    jump = True
+                    initial_y = player_rect.y
         # --- Handle Key Presses (KEYUP) ---
         if event.type == pygame.KEYUP:
             if event.key in (pygame.K_LEFT, pygame.K_RIGHT):
@@ -63,12 +65,15 @@ while not end:
                 
     # JUMPING LOGIC
     if jump == True:
-        player_rect.y -= 15
+        player_rect.y -= 8
         if player_rect.y <= initial_y - 70:
             jump = False
-    else: 
+            fall = True
+    if fall == True: 
         if player_rect.y < initial_y: #Don't do <= bc then movement will be choppy
             player_rect.y += 4 # go down
+        else:
+            fall = False
 
     player_rect.x += player_dx
     player_rect.y += player_dy
