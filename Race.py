@@ -207,7 +207,7 @@ def run():
 
                 # Kid reaches goal
                 if kid_rect.colliderect(goalK_rect):
-                    print("You lose!")
+                    print("You lost!")
                     end = True
                     return FinishLine_x, end
             goal_detection()  # ← aligned with def (same indent level)
