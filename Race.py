@@ -73,8 +73,15 @@ def run():
         # Kid's Lane
         goalK_rect = pygame.Rect(850, HEIGHT- 150, goal_image.get_width(), goal_image.get_height())
 
-        return background, goal_image, goalP_rect, goalK_rect
-    background, goal_image, goalP_rect, goalK_rect = assets()
+        # Border Line Image
+        BorderLine_image = pygame.image.load(os.path.join("ProjectImages", "TransPBorderLine.png"))
+        BorderLine_image = pygame.transform.smoothscale(BorderLine_image, (960, 15))
+        # Positioning Border Line in center
+        Border_y = HEIGHT - 200
+        BorderLine_rect = pygame.Rect(0, Border_y, 960, 15)
+        return background, goal_image, goalP_rect, goalK_rect, BorderLine_image, BorderLine_rect 
+    background, goal_image, goalP_rect, goalK_rect, BorderLine_image, BorderLine_rect = assets()
+
 
     # ---------------------------------------------------------------------
     #-------------------------------------------------------------------------
@@ -132,6 +139,12 @@ def run():
                 p_rect.y += player_dy
             player_collision()
 
+            # BORDERLINE COLLISION
+            def border_line_collision():
+                if p_rect.colliderect(BorderLine_rect):
+                    p_rect.y -= player_dy
+            border_line_collision()
+
             # BORDER COLLISION --> use < & > adds flexibility, to snap ONLY if player is too far
             def boarder_collision():
                 # Player
@@ -169,7 +182,7 @@ def run():
 
                 # Player reaches goal
                 if p_rect.colliderect(goalP_rect):
-                    print("You win!")
+                    print("You won the race!")
                     end = True
                     return FinishLine_x, end
 
@@ -189,6 +202,7 @@ def run():
                 screen.blit(kid_image, kid_rect)
                 screen.blit(goal_image, goalP_rect) 
                 screen.blit(goal_image, goalK_rect)
+                screen.blit(BorderLine_image, BorderLine_rect)
             #---------------------------------------------------------------
             # Update the display and cap frame rate
             pygame.display.flip()

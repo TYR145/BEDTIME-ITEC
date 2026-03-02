@@ -181,24 +181,24 @@ def run():
                 
                 #-----SWITCH TO ARROW KEYS------ 
                 # LEFT
-                if event.key == pygame.K_a:
+                if event.key == pygame.K_LEFT:
                     player_dx = -player_speed
                     player_currentD = player_Left
                 # RIGHT
-                if event.key == pygame.K_d:
+                if event.key == pygame.K_RIGHT:
                     player_dx = player_speed
                     player_currentD = player_Right
                 # UP
-                if event.key == pygame.K_w:
+                if event.key == pygame.K_UP:
                     player_dy = -player_speed
                     player_currentD = player_Up
                 # DOWN
-                if event.key == pygame.K_s:
+                if event.key == pygame.K_DOWN:
                     player_dy = player_speed
                     player_currentD = player_Down
 
             if event.type == pygame.KEYUP:
-                    if event.key in (pygame.K_a, pygame.K_d, pygame.K_w, pygame.K_s):
+                    if event.key in (pygame.K_LEFT, pygame.K_RIGHT, pygame.K_UP, pygame.K_DOWN):
                         player_dx = 0
                         player_dy = 0
 
@@ -242,7 +242,7 @@ def run():
         # Checks to end if Star is visible & Player touching the Star's rect 
         if eStar_visible and p_rect.colliderect(eStar_rect):
             end = True
-            print("You won!")
+            print("You completed the maze!")
 
 
     # ======================
