@@ -35,7 +35,7 @@ def run():
         # Player's location and speed
         player_x = 10           # Spawnpoint
         player_y = HEIGHT - 320 # Spawnpoint
-        player_speed = 2
+        player_speed = 3
         # Player Rect --> needed for border collision
         p_rect = pygame.Rect(player_x, player_y, player_image.get_width(), player_image.get_height())
 
@@ -82,6 +82,25 @@ def run():
         return background, goal_image, goalP_rect, goalK_rect, BorderLine_image, BorderLine_rect 
     background, goal_image, goalP_rect, goalK_rect, BorderLine_image, BorderLine_rect = assets()
 
+    #Race obstacles
+    def create_obstacles():
+        obstacles = []
+        obs_image = pygame.image.load(os.path.join("ProjectImages", "obstacle.png"))
+        obs_image = pygame.transform.smoothscale(obs_image, (60,110))
+
+        obs_coords = [
+            (150, 10),
+            (300, 150),
+            (450, 10),
+            (600, 150),
+            (750, 10)
+        ]
+
+        for x,y in obs_coords:
+            rect = obs_image.get_rect(topleft = (x,y))
+            obstacles.append((obs_image, rect))
+        return obstacles
+    obstacles = create_obstacles()
 
     # ---------------------------------------------------------------------
     #-------------------------------------------------------------------------
@@ -198,6 +217,14 @@ def run():
             def draw():
                 # DRAW
                 screen.blit(background, (0, 0))
+                
+                for obs_image , rect in obstacles:
+                    screen.blit(obs_image,rect)
+                    if p_rect.colliderect(rect):
+                        p_rect.x -= player_dx
+                        p_rect.y -= player_dy
+
+
                 screen.blit(player_image, p_rect)
                 screen.blit(kid_image, kid_rect)
                 screen.blit(goal_image, goalP_rect) 
