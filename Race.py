@@ -35,7 +35,7 @@ def run():
         # Player's location and speed
         player_x = 10           # Spawnpoint
         player_y = HEIGHT - 320 # Spawnpoint
-        player_speed = 8
+        player_speed = 2
         # Player Rect --> needed for border collision
         p_rect = pygame.Rect(player_x, player_y, player_image.get_width(), player_image.get_height())
 
