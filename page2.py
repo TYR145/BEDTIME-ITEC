@@ -1,21 +1,21 @@
+import Race
+
 def page2():
-    print("\n--- PAGE 2 ---")
-    print("You walk forward and find a hallway.")
-    print("[W] Continue forward")
-    print("[B] Go back to Page 1")
-    print("[R] Play Race mini-game")
-    print("[Q] Quit")
+    print("\n=== PAGE 2 ===")
+    print("SECOND PAGE.")
+    print("Press D to go to the next page.")
+    print("Press A to go back to Page 1.")
+    print("Press P to play the [Racing] Game")
 
     choice = input("Choose: ").lower()
 
-    if choice == "w":
+    if choice == "d":
         return "page3"
-    elif choice == "b":
+    elif choice == "p":
+        Race.run()
+        return "page2"
+    elif choice == "a":
         return "page1"
-    elif choice == "r":
-        return "race"
-    elif choice == "q":
-        return "quit"
     else:
         print("Invalid choice.")
         return "page2"

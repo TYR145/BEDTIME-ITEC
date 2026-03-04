@@ -1,24 +1,16 @@
 def page1():
-    print("\n--- PAGE 1 ---")
-    print("You wake up in a dark room.")
-    print("[W] Go forward")
-    print("[A] Go left")
-    print("[D] Go right")
-    print("[M] Play Maze mini-game")
-    print("[Q] Quit")
+    print("\n=== PAGE 1 ===")
+    print("FIRST PAGE.")
+    print("Press D to go to the next page.")
+    print("Press A to go back (does nothing because this is the first page).")
+    #print("Press P to play [Meal Prep - N/A])
 
     choice = input("Choose: ").lower()
 
-    if choice == "w":
+    if choice == "d":
         return "page2"
     elif choice == "a":
-        return "page3"
-    elif choice == "d":
-        return "page4"
-    elif choice == "m":
-        return "maze"
-    elif choice == "q":
-        return "quit"
+        return "page1"   # can't go back further
     else:
         print("Invalid choice.")
         return "page1"

@@ -1,19 +1,22 @@
+import Maze
+
 def page4():
-    print("\n--- PAGE 4 ---")
-    print("You find a locked door with strange symbols.")
-    print("[T] Try to open it")
-    print("[B] Go back to Page 3")
-    print("[Q] Quit")
+    print("\n=== PAGE 4 ===")
+    print("FOURTH PAGE.")
+    print("Press A to go back to Page 3.")
+    print("Press D to got to Page 5.")
+    print("Press P to play [Maze] game")
+
 
     choice = input("Choose: ").lower()
 
-    if choice == "t":
-        print("The door won't budge.")
+    if choice == "a":
         return "page4"
-    elif choice == "b":
+    elif choice == "d":
         return "page3"
-    elif choice == "q":
-        return "quit"
+    elif choice == "p":
+        Maze.run()
+        return "page4"
     else:
         print("Invalid choice.")
         return "page4"
