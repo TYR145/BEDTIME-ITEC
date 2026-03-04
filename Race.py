@@ -43,7 +43,6 @@ def run():
     # CALL BACK FUNCTION --> include values defined
     player_image, player_x, player_y, player_speed, p_rect = player()
 
-
     def kid():
         # Defining Kid
         kid_image = pygame.image.load(os.path.join("ProjectImages", "kid_img.png"))
