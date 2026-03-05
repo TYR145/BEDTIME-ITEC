@@ -39,7 +39,7 @@ def main():
             Maze.run()
             current_page = "page2"  # page shown after mini-game is completed
 
-        elif current_page == "race":
+        elif current_page == "p":
             Race.run()
             current_page = "page4"
 
