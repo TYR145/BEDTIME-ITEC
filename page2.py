@@ -1,7 +1,7 @@
 import Race
 
 def page2():
-    print("\n=== PAGE 2 ===")
+    print("=== PAGE 2 ===")
     print("SECOND PAGE.")
     print("Press D to go to the next page.")
     print("Press A to go back to Page 1.")

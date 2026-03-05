@@ -1,14 +1,6 @@
-"""
-import Maze
-import Race
+# MAIN PAGE -- "Scroll" through pages here w/ mini games (Available only in pages 2 & 3)
 
-def main():
-    Maze.run() # maze mini-game page 
-    Race.run() # race mini-game page
-main()
-"""
-import Maze
-import Race
+
 import page1
 import page2
 import page3
@@ -32,19 +24,10 @@ def main():
             current_page = page5.page5()
         elif current_page == "page6":
             current_page = page6.page6()
-
-
-    # Linking the Mini games to respective pages
-        elif current_page == "maze":
-            Maze.run()
-            current_page = "page2"  # page shown after mini-game is completed
-
-        elif current_page == "p":
-            Race.run()
-            current_page = "page4"
-
         else:
             print("Exiting page.")
             current_page = "quit"
+
     print("That's all for now!")
+
 main()
