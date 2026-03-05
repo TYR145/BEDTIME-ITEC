@@ -2,7 +2,6 @@
 
 def page1():
     print("=== PAGE 1 ===")
-    print("FIRST PAGE.")
     print("Press D to go to page 2.")
     #print("Press P to play [Meal Prep - N/A])
 

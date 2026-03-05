@@ -2,10 +2,9 @@ import Maze
 
 def page3():
     print("=== PAGE 3 ===")
-    print("THIRD PAGE.")
     print("Press D to go to Page 4.")
     print("Press A to go back to Page 2.")
-    print("Press P to play [Maze] game")
+    print("Press P to play [Maze] game --> check hotbar for Python window")
 
     choice = input("Choose: ").lower()
 

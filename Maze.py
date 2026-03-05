@@ -16,9 +16,6 @@ def run():
     clock = pygame.time.Clock()
 
     # COLOURS
-    BLACK = (0, 0, 0)
-    WHITE = (255, 255, 255)
-    BLUE = (0, 0, 255)
 
     """
     ADD OBSTACLES BETWEEN?? 
@@ -249,38 +246,33 @@ def run():
     #      DRAWING
     # ======================
 
-        # Descending Order -- Which images get drawn first
-        screen.blit(background, (0, 0))       # Draw BG FIRST
-        screen.blit(player_currentD, p_rect)  # Draw player
+        screen.blit(background, (0, 0))
+        screen.blit(player_currentD, p_rect)
 
-        # Drawing POINTS --> PLACEMENT & VISIBILITY
-        if wc1_visible == True:
+        if wc1_visible:
             screen.blit(wc1, wc1_rect)
-        if wc2_visible == True:
+        if wc2_visible:
             screen.blit(wc2, wc2_rect)
-        if wc3_visible == True:
+        if wc3_visible:
             screen.blit(wc3, wc3_rect)
-        if wc4_visible == True:
+        if wc4_visible:
             screen.blit(wc4, wc4_rect)
-        
-        # Drawing Obstacles --> use "for-in" loops to iterate through lists
-        for obs_img, rect in obstacles: #--> obs_rec & img are vars defined in obstacles function
+
+        for obs_img, rect in obstacles:
             screen.blit(obs_img, rect)
-
-            #--> Add if to detect IF PLAYER touches the object
-            #--> still call it "rect" bc detecting the object TYPE
             if p_rect.colliderect(rect):
-                p_rect.x -= player_dx # Collision to bounce player BACk (-=) for X
-                p_rect.y -= player_dy # Collision ``` BACK `` for y
+                p_rect.x -= player_dx
+                p_rect.y -= player_dy
 
-        # DRAWING Exit Star
         eStar_rect.topleft = (player_x, player_y)
-        if eStar_visible == True:
+        if eStar_visible:
             screen.blit(eStar, eStar_rect)
-        
-
 
         pygame.display.flip()
         clock.tick(FPS)
+
+    pygame.quit()
+    return "win"
+
 if __name__ == "__main__":
     run()
