@@ -11,7 +11,7 @@ def run():
     WIDTH, HEIGHT = 960, 450
     FPS = 60 
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
-    pygame.display.set_caption("Maze Mechanics - BETA")
+    pygame.display.set_caption("Race Mechanics - BETA")
     clock = pygame.time.Clock()
 
     """
