@@ -1,4 +1,4 @@
-import Race
+from Games import Race
 
 def page2():
     print("=== PAGE 2 ===")

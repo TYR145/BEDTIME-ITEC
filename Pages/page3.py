@@ -1,4 +1,4 @@
-import Maze
+from Games import Maze
 
 def page3():
     print("=== PAGE 3 ===")

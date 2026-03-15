@@ -1,12 +1,12 @@
 # MAIN PAGE -- "Scroll" through pages here w/ mini games (Available only in pages 2 & 3)
 
 
-import page1
-import page2
-import page3
-import page4
-import page5
-import page6
+from Pages import page1
+from Pages import page2
+from Pages import page3
+from Pages import page4
+from Pages import page5
+from Pages import page6
 
 def main():
     current_page = "page1"
