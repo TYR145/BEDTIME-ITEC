@@ -65,7 +65,7 @@ def run():
 
 
     # OBJECTS
-
+    
     # White Circles - POINTS & RECTS (Will change for individual toys)
     wc1 = pygame.image.load(os.path.join("ProjectImages", "w_circle.png"))
     wc1 = pygame.transform.smoothscale(wc1, (30,30)) #--> DIMENSION SCALING
@@ -83,7 +83,6 @@ def run():
     wc2_rect = pygame.Rect(350,240, wc2.get_width(),wc2.get_height())
     wc3_rect = pygame.Rect(150,370, wc3.get_width(),wc3.get_height())
     wc4_rect = pygame.Rect(550,67, wc4.get_width(),wc4.get_height())
-
 
 
     # Defining Obstacles --> Put inside def Function idk....)
