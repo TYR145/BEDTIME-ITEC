@@ -10,7 +10,9 @@ class Bubbles:
         self.image = pygame.transform.smoothscale(self.image, (180, 180)) #--> Image dimensions (x,y)
         self.rect = self.image.get_rect(topleft=(x,y))
         self.speed = random.uniform(0.4, 2) #--> Random speed for each bubble
-        self.visibility = 150 #--> Bubbles starts off fully opaque
+        self.sway = random.uniform(-1, 1) #--> Initializing sway variable for horizontal movement
+        self.turn = 0 #--> Initializing turn to SWITCH between Regular Bubble (1)
+        self.visibility = None #--> Bubbles starts off fully opaque
 
 class SpecialBubbles:
     def __init__(self, x, y): #defines location of bubble
@@ -18,7 +20,9 @@ class SpecialBubbles:
         self.image = pygame.transform.smoothscale(self.image, (180, 180)) #--> Image dimensions (x,y)
         self.rect = self.image.get_rect(topleft=(x,y))
         self.speed = random.uniform(0.5, 2) #--> Random speed for each bubble
-        #self.visibility = 255 #--> Bubbles starts off fully opaque
+        self.sway = random.uniform(-1, 0.5) #--> Initializing sway variable for horizontal movement
+        self.turn = 1 #--> Initializing turn to SWITCH between Special Bubble (0)
+        self.visibility = None #--> Bubbles starts off fully opaque
 
 def run():
     global screen, clock, background, bubble, special_bubble, end, FPS
@@ -67,13 +71,11 @@ def run():
         special_bubble = pygame.transform.smoothscale(special_bubble, (120, 120)) #--> Image dimensions (x,y)
 
         # Adding bubbles movement
-        
-        
-        for b in range(10): #--> Adding 8 bubbles to the list
+        for b in range(18): #--> Adding 20 bubbles to the list
             x = random.randint(0, 450) #--> spawning bubbles within screen bounds
             y = random.randint(480, 1000)
             b = Bubbles(x, y) #--> assigning b to the properties assigned in the CLASS "Bubbles"
-            #b.turn = random.randint(0,1) #--> Random switch between regular and special bubble images (0 for regular, 1 for special)
+            b.turn = random.randint(0,1) #--> Random switch between regular and special bubble images (0 for regular, 1 for special)
             bubbles.append(b)
 
 
@@ -87,12 +89,16 @@ def run():
             if event.type == pygame.QUIT:
                 end = True
         # Adding movement to the bubbles --> each one individually
-        for b in range(10):
+        for b in range(18): #--> spawning 18 bubbles
             bubbles[b].rect.y -= bubbles[b].speed
-            #bubbles[b].rect.x += random.uniform(-0.8, 0.8) #--> uniform() shaking HORI spacing to bubbles
+            bubbles[b].rect.x += bubbles[b].sway #--> Adding horizontal sway movement to the bubbles
+            
+            # TOP BORDER --> teleports bubbles to bottom
             if bubbles[b].rect.y < -120:
-                bubbles[b].rect.y = random.randint(480, 1000) #--> randomly spawning bubbles at bottom of the screen
+                bubbles[b].rect.y = random.randint(480, 1600) #--> randomly spawning bubbles at bottom of the screen
                 bubbles[b].rect.x = random.randint(0, 450) #--> ensuring bubble is within screen bounds
+            if random.random() < 0.01: #--> changing swaying movement every 0.03 seconds (randomly)
+                bubbles[b].sway = random.uniform(-1.5, 1.5)
 
             """
             # Changing between images
