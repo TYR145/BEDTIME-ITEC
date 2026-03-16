@@ -4,7 +4,7 @@ def page4():
     print("=== PAGE 4 ===")
     print("Press D to go to Page 5.")
     print("Press A to go back to Page 3.")
-    print("Press P to play [Bubbles] game")
+    print("Press P to play [Bubbles] game --> CHECK HOTBAR")
 
     choice = input("Choose: ").lower()
    
