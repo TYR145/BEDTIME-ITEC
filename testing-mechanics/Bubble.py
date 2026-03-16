@@ -24,7 +24,7 @@ def run():
     # ===========================================================
 
     # Adding BG Images
-    background = pygame.image.load(os.path.join("ProjectImages", "OpenBG.jpg"))
+    background = pygame.image.load(os.path.join("ProjectImages", "OpenBG.jpg")) # Image loads
     background = pygame.transform.smoothscale(background, (WIDTH, HEIGHT))
 
 
@@ -33,7 +33,7 @@ def run():
         
         def __init__(self, x, y): #defines location of bubble
             self.image = pygame.image.load(os.path.join("ProjectImages", "bubble.png"))
-            self.image = pygame.transform.smoothscale(self.image, (60, 60)) #--> Image dimensions (x,y)
+            self.image = pygame.transform.smoothscale(self.image, (120, 120)) #--> Image dimensions (x,y)
             self.rect = self.image.get_rect(topleft=(x,y))
             self.speed = 3
             self.visibility = 255 #--> Bubbles starts fully opaque
@@ -60,17 +60,18 @@ def run():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+    # ======================
+    #      DRAWING --> background first
+    # ======================
+        screen.blit(background, (0, 0)) #--> Draw background first
+        
+        for bubble in bubbles: #--> Drawing each bubble next
+            screen.blit(bubble.image, bubble.rect)
 
-        screen.blit(background, (0, 0))
         pygame.display.flip()
         clock.tick(FPS)
-
-
-    # ======================
-    #      DRAWING
-    # ======================
-
-    screen.blit(background, (0, 0))
+    
+    # Ends Pygame window --> keep indented in def run() function
     pygame.quit()
 
 if __name__ == "__main__":
