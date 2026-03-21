@@ -21,3 +21,6 @@ NARRATIVE:
     - 
 1. Kitchen == Meal Prep minigame
 2. Backyard == 
+3. Bathtime == 
+    - Only special_bubbles will be clickable (click x amount to "complete" activity)
+    - Adjust bubble transparency & keep "special bubble" more opaque

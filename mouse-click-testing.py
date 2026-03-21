@@ -3,18 +3,6 @@ import pygame
 import os
 import random
 
-import pygame
-import os
-import random
-
-# Define BASE_DIR FIRST
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-# NOW you can print it
-print("BASE_DIR =", BASE_DIR)
-print("ProjectImages exists:", os.path.isdir(os.path.join(BASE_DIR, "ProjectImages")))
-print("Files inside ProjectImages:", os.listdir(os.path.join(BASE_DIR, "ProjectImages")))
-
 
 # Always load images relative to THIS file's folder
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
