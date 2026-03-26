@@ -1,3 +1,5 @@
+# BUBBLES CLICK - Modify code manually
+
 import pygame
 import os
 import random
