@@ -1,17 +1,34 @@
-# import MealPrep
+import pygame
+
 
 def page1():
-    print("=== PAGE 1 ===")
-    print("Press D to go to page 2.")
-    #print("Press P to play [Meal Prep - N/A])
+    pygame.init()
+    screen = pygame.display.set_mode((400, 200))
+    pygame.display.set_caption("PAGE 2")
 
-    choice = input("Choose: ").lower()
+    # --- Load images ---
+    img_page2 = pygame.image.load("ProjectImages/next_button.png")
 
-    if choice == "d":
-        return "page2"
-    #elif choice == "p":
-        #MealPrep.run()
-        #return "page1"
-    else:
-        print("Invalid choice.")
-        return "page1"
+    # Resize if needed
+    img_page2 = pygame.transform.smoothscale(img_page2, (130, 50))
+
+   # Creating Rects for Clicking events
+    rect_page2 = img_page2.get_rect(topleft=(220, 80))
+
+    running = True
+    while running:
+        screen.fill((30, 30, 30))
+        # Draw image buttons
+        screen.blit(img_page2, rect_page2)
+        pygame.display.update()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.display.quit()
+                return "quit"
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if rect_page2.collidepoint(event.pos):
+                    pygame.display.quit()
+                    return "page2"
+

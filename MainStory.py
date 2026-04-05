@@ -1,6 +1,5 @@
 # MAIN PAGE -- "Scroll" through pages here w/ mini games (Available only in pages 2 & 3)
 
-
 from Pages import page1
 from Pages import page2
 from Pages import page3
@@ -29,5 +28,4 @@ def main():
             current_page = "quit"
 
     print("That's all for now!")
-
 main()

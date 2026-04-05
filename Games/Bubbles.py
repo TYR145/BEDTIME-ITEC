@@ -1,161 +1,198 @@
-# Adding floating bubbles to the screen
-
 import pygame
 import os
 import random
 
-class GameObjects:
-    class Bubbles:
-        def __init__(self, x, y): #defines location of bubble
-            self.image = pygame.image.load(os.path.join("ProjectImages", "bubble.png"))
-            self.image = pygame.transform.smoothscale(self.image, (180, 180)) #--> Image dimensions (x,y)
-            self.rect = self.image.get_rect(topleft=(x,y))
-            self.speed = random.uniform(0.5, 1) #--> Random speed for each bubble
-            self.sway = random.uniform(-1, 1) #--> Initializing sway variable for horizontal movement
-            self.turn = 0 #--> Initializing turn to SWITCH between Regular Bubble (1)
-            self.visibility = None #--> Bubbles starts off fully opaque
 
-    # --> THESE WILL BE CLICKABLE INSTEAD
+#---------------------
+# Bubble Objects
+#---------------------
+class BubbleObject:
+    class Bubbles:
+        def __init__(self, x, y): #defines bubble properties
+            self.visibility = 255 #--> Bubbles starts off fully opaque
+            self.image = pygame.image.load(os.path.join("ProjectImages", "bubble.png")).convert_alpha() #--> transparent images
+            self.image = pygame.transform.smoothscale(self.image, (180, 180)) #--> Image dimensions (x,y)
+           
+            # Setting image alpha (transparency) for regular bubbles
+            self.image.set_alpha(200)
+
+
+            # Defining variables for movement, speed & type detection
+            self.rect = self.image.get_rect(topleft=(x,y))
+            self.speed = random.uniform(0.75, 2) #--> Random verticle speed for each bubble
+            self.turn = 0 #--> Detecting Regular Bubbles            
+            self.sway = random.uniform(-1, 1) #--> Initializing sway variable for horizontal movement
+
+
+        def Move(self):
+            # Bubble movement
+            self.rect.x += self.sway
+            self.rect.y -= self.speed # decrease y to go up
+
+
+            # Adding Sway
+            if random.random() < 0.01: #--> changing swaying movement every 0.03 seconds (randomly)
+                self.sway = random.uniform(-1.5, 1.5)
+               
+            # Teleporting bubbles to bottom
+            if self.rect.y < -120:
+                self.rect.y = random.randint(480, 900) #--> coord randomized within range
+                self.rect.x = random.randint(0, 450) #--> coord randomized within range
+       
     class SpecialBubbles:
         def __init__(self, x, y): #defines location of bubble
-            self.image = pygame.image.load(os.path.join("ProjectImages", "special_bubble.png"))
+            self.image = pygame.image.load(os.path.join("ProjectImages", "special_bubble.png")).convert_alpha()
             self.image = pygame.transform.smoothscale(self.image, (180, 180)) #--> Image dimensions (x,y)
+           
             self.rect = self.image.get_rect(topleft=(x,y))
             self.speed = random.uniform(0.2, 1) #--> Random speed for each bubble
+            self.turn = 1 # detecting Special Bubbles
+
+
             self.sway = random.uniform(-1, 0.5) #--> Initializing sway variable for horizontal movement (- to + controls VIBRATION)
-            self.turn = 1 #--> Initializing turn to SWITCH between Special Bubble (0)
             self.visibility = None #--> Bubbles starts off fully opaque
-
-class Game:
-    def run(self):
-        global screen, clock, background, bubble, special_bubble, end, FPS
-        # OBJECTS (List, Global variables, etc.)
-
-        # Global variables
-        screen = None
-        clock = None
-        background = None
-        bubble = None
-        special_bubble = None
-        end = None
-        FPS = None
+       
+        def Move(self):
+            # Special bubble movement
+            self.rect.x += self.sway
+            self.rect.y -= self.speed
 
 
-        # List --> adding bubbles to a list to easily manage them
-        bubbles = []
-
-        #-------------------------------------------------------#
-        #   INITIALIZATION: Defining variables & Adding Images  #
-        #-------------------------------------------------------#
-        def init():
-            global screen, clock, background, bubble, special_bubble, x, y, end, FPS, i
-            pygame.init()
-
-            # Creating game window & clock
-            WIDTH, HEIGHT = 750, 480
-            FPS = 60
-            screen = pygame.display.set_mode((WIDTH, HEIGHT))
-            pygame.display.set_caption("Bubbles Clicking - TESTING")
-            clock = pygame.time.Clock()
-
-            # Define game variables
-            # Background Image
-            background = pygame.image.load(os.path.join("ProjectImages", "background.jpg"))
-            background = pygame.transform.smoothscale(background, (WIDTH, HEIGHT))
-
-            # Bubble Images (regular & special)
-            bubble = pygame.image.load(os.path.join("ProjectImages", "bubble.png"))
-            bubble = pygame.transform.smoothscale(bubble, (110, 110)) #--> Image dimensions (x,y)
-
-            special_bubble = pygame.image.load(os.path.join("ProjectImages", "special_bubble.png"))
-            special_bubble = pygame.transform.smoothscale(special_bubble, (110, 110)) #--> Image dimensions (x,y)
-
-            # Adding bubbles movement
-            for i in range(15): #--> Adding (number) of bubbles to the list
-                x = random.randint(200, 450) #--> spawning bubbles within screen bounds
-                y = random.randint(500, 900)
-                b = GameObjects.Bubbles(x, y) #--> assigning b to the properties assigned in the CLASS "Bubbles"
-                b.turn = random.randint(0,1) #--> Random switch between regular and special bubble images (0 for regular, 1 for special)
-                bubbles.append(b)
+            # Adding Sway
+            if random.random() < 0.01:
+                self.sway = random.uniform(-1.5, 1.5)
 
 
-        #-------------------------------------------------------#
-        #   UPDATE: Changing variables & Adding movements       #
-        #-------------------------------------------------------#
-        def update():
-            global screen, clock, background, bubble, special_bubble, x, y, end, FPS, i
-            
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    end = True
-                # Change to --> Popping Special_Bubbles (ONLY)
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    mouse_pos = pygame.mouse.get_pos() #--> get_pos() for tracking the POSITION of mouse (x,y)
-                    for b in bubbles[:]:
-                        if b.rect.collidepoint(mouse_pos): #--> click on bubbles teleports them to the bottom again
+            # Teleporting bubbles to bottom
+            if self.rect.y < -120:
+                self.rect.y = random.randint(480, 900) #-->
+                self.rect.x = random.randint(0, 450)
+
+
+#>>---------------------------------
+# INIT
+#>>---------------------------------
+class BubbleGame():
+    def __init__(self):
+        pygame.init()
+
+
+        # Creating Game window
+        WIDTH, HEIGHT = 900, 500
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        self.FPS = 60
+        pygame.display.set_caption("Game 3: Bubbles")
+        self.clock = pygame.time.Clock()
+       
+        # Background image
+        self.background = pygame.image.load(os.path.join("ProjectImages", "background.jpg"))
+        self.background = pygame.transform.smoothscale(self.background, (WIDTH, HEIGHT)) #--> Image dimensions (x,y)
+
+
+        # Bubble images
+        self.bubbles = []
+        self.spawn_bubbles() #--> not a function yet
+           
+        self.running = True #--> keeps game Loop running
+
+
+        # Setting a popping score COUNTER and GOAL
+        self.pop_count = 0
+        self.pop_goal = 10
+
+
+    #-----------------------------------
+    # SPAWN BUBBLES LOGIC
+    #-----------------------------------
+    def spawn_bubbles(self):
+        for _ in range(15):
+            x = random.randint(150, 450)
+            y = random.randint(500, 900)
+
+
+            # Randomly choose bubble type
+            if random.randint(0, 4) == 1: #--> expanding range changes percentage rate of Special bubbles spawning
+                b = BubbleObject.SpecialBubbles(x, y) #--> 1/5 numbers = 20% appearance rate (0,1,2,3,4)
+            else:
+                b = BubbleObject.Bubbles(x, y)
+
+
+            self.bubbles.append(b)
+
+
+#>>---------------------------------
+# UPDATE
+#>>---------------------------------
+    # Mouse click events
+    def Update(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.running = False
+                return
+
+
+            # Mouse click events: "Pop" bubbles upon click
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                for b in self.bubbles:
+                    if b.rect.collidepoint(mouse_pos):
+                        if b.turn == 1: # Popping special bubbles ONLY
                             b.rect.y = random.randint(500, 900)
                             b.rect.x = random.randint(200, 450)
-                """
-                If changed to special bubbles only, use .remove() for the special_bubbles
-                """
-
-            # Adding movement to the bubbles --> each one individually
-            for b in bubbles: #--> spawning (number) of bubbles
-                b.rect.y -= b.speed
-                b.rect.x += b.sway #--> Adding horizontal sway movement to the bubbles
-                
-                # TOP BORDER --> teleports bubbles to bottom
-                if b.rect.y < -120:
-                    b.rect.y = random.randint(480, 900) #--> randomly spawning bubbles at bottom of the screen
-                    b.rect.x = random.randint(0, 450) #--> ensuring bubble is within screen bounds
-                if random.random() < 0.01: #--> changing swaying movement every 0.03 seconds (randomly)
-                    b.sway = random.uniform(-1.5, 1.5)
-
-                """
-                # Changing between images
-                bubbles[b].turn = 1- bubbles[b].turn #--> toggles between bubble (0) & special_bubble images (1)
-                if (bubbles[b].turn == 0):
-                    bubbles[b].image = bubble
-                else:
-                    bubbles[b].image = special_bubble
-                """
-        #-----------------------------#
-        #   DRAW: Drawing all images  #
-        #-----------------------------#
-        def draw():
-            global screen, clock, background, bubble, special_bubble, bubble_speed, end, FPS
-
-            # 1. Draw background
-            screen.blit(background, (0, 0))
-            # 2. Draw bubbles (using objects directly from the list)
-            for b in bubbles:
-                screen.blit(b.image, b.rect)
-            
-            # 3. Update display & set FPS
-            pygame.display.flip()
-            clock.tick(FPS)
 
 
-        #-------------------------------------------------------#
-        #   MAIN GAME LOOP: Calling functions & Drawing        #
-        #-------------------------------------------------------#
-        def MainLoop():
-            global end
-
-            end = False
-            while not end:
-                update() # --> Calling the update function FROM the CLASS called Update
-                draw()
+                            # INCREASE COUNTER when bubble popped
+                            self.pop_count += 1
 
 
-        # Run the game
-        init() #--> Calling the init function FROM the CLASS called Initialization
-        MainLoop()
+                            # Checking if the Popping goal is reached!
+                            if self.pop_count >= self.pop_goal:
+                                self.running = False
+                                print("All bubbles collected!")
 
-        # Quit Pygame
-        pygame.quit()
 
-#>>-----------------------------------<<
+#>>---------------------------------
+# DRAW: all images
+#>>---------------------------------
+    def Draw(self):
+        # 1. Drawing background - FIRST
+        self.screen.blit(self.background, (0,0))
+       
+        # 2. Drawing Bubbles (Regular & Special)
+        for b in self.bubbles:
+            b.Move() #--> Move function for each bubble
+            self.screen.blit(b.image, b.rect)
+
+
+        # 3. Drawing counter UI
+        font = pygame.font.Font(None, 36)
+        pop_text = font.render(f"Popped: {self.pop_count}/{self.pop_goal}", True, (255, 255, 255))
+        self.screen.blit(pop_text, (10, 10))
+
+
+        # 4. Updating display & setting FPS - LAST
+        pygame.display.update()
+        self.clock.tick(self.FPS)
+
+
+#>>---------------------------------
+# MAIN GAME LOOP: run logic
+#>>---------------------------------
+    def MainLoop(self):
+        while self.running:
+            self.Update()
+            self.Draw()
+
+
+#>>-----------<<#
+def run():
+    game = BubbleGame()
+    game.MainLoop()
+    pygame.quit()
+
+
 if __name__ == "__main__":
-    game = Game() #--> creating Game() object & assigning it to "game"
-    game.run() #--> running methods & properties in class called "Game()"
+    run()
+
+
+
