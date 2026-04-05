@@ -17,14 +17,6 @@ def run():
 
     # COLOURS
 
-    """
-    ADD OBSTACLES BETWEEN?? 
-    --> enemies or just a maze like as planned... once I know how lol
-
-    ADD ending image??? Idk
-    --> figure out how to make new message appear when you touch exit star
-    """
-
     # ===========================================================
     #      ADDING IMAGES --- ADD IMAGE RECT FOR BORDER COLLISION
     # ===========================================================
@@ -35,21 +27,21 @@ def run():
 
     # ---------------------------------------------------------------------
     # Player
-    player_image = pygame.image.load(os.path.join("ProjectImages","Arrow_R.png"))
+    player_image = pygame.image.load(os.path.join("ProjectImages","arrow_R.png"))
     player_image = pygame.transform.smoothscale(player_image, (35, 35))
 
 
     # PLAYER Directional Sprites & Image scaling --> use "smoothscale()" to smooth edges
-    player_Left = pygame.image.load(os.path.join("ProjectImages", "Arrow_L.png"))
+    player_Left = pygame.image.load(os.path.join("ProjectImages", "arrow_L.png"))
     player_Left = pygame.transform.smoothscale(player_Left, (35, 35)) 
 
-    player_Right = pygame.image.load(os.path.join("ProjectImages", "Arrow_R.png"))
+    player_Right = pygame.image.load(os.path.join("ProjectImages", "arrow_R.png"))
     player_Right = pygame.transform.smoothscale(player_Right, (35, 35))
 
-    player_Up = pygame.image.load(os.path.join("ProjectImages", "Arrow_U.png"))
+    player_Up = pygame.image.load(os.path.join("ProjectImages", "arrow_U.png"))
     player_Up = pygame.transform.smoothscale(player_Up, (35, 35))
 
-    player_Down = pygame.image.load(os.path.join("ProjectImages", "Arrow_D.png"))
+    player_Down = pygame.image.load(os.path.join("ProjectImages", "arrow_D.png"))
     player_Down = pygame.transform.smoothscale(player_Down, (35, 35))
 
     # Player's location and speed

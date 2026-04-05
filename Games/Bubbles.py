@@ -60,7 +60,7 @@ class Game:
 
             # Define game variables
             # Background Image
-            background = pygame.image.load(os.path.join("ProjectImages", "OpenBG.jpg"))
+            background = pygame.image.load(os.path.join("ProjectImages", "background.jpg"))
             background = pygame.transform.smoothscale(background, (WIDTH, HEIGHT))
 
             # Bubble Images (regular & special)

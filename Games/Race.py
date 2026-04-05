@@ -29,7 +29,7 @@ def run():
 
     def player():
         # Defining Player
-        player_image = pygame.image.load(os.path.join("ProjectImages","Arrow_R.png"))
+        player_image = pygame.image.load(os.path.join("ProjectImages","arrow_R.png"))
         player_image = pygame.transform.smoothscale(player_image, (45, 45))
 
         # Player's location and speed
@@ -59,7 +59,7 @@ def run():
 
     def assets():
         # Adding BG Images
-        background = pygame.image.load(os.path.join("ProjectImages", "OpenBG.jpg"))
+        background = pygame.image.load(os.path.join("ProjectImages", "background.jpg"))
         background = pygame.transform.smoothscale(background, (WIDTH, HEIGHT))
         #----------------------------------------------------------------------
         # Goal
@@ -73,7 +73,7 @@ def run():
         goalK_rect = pygame.Rect(850, HEIGHT- 150, goal_image.get_width(), goal_image.get_height())
 
         # Border Line Image
-        BorderLine_image = pygame.image.load(os.path.join("ProjectImages", "TransPBorderLine.png"))
+        BorderLine_image = pygame.image.load(os.path.join("ProjectImages", "borderline.png"))
         BorderLine_image = pygame.transform.smoothscale(BorderLine_image, (960, 15))
         # Positioning Border Line in center
         Border_y = HEIGHT - 200
