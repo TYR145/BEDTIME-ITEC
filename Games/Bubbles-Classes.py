@@ -83,7 +83,7 @@ class Game:
        self.clock = pygame.time.Clock()
        
        # Background image
-       self.background = pygame.image.load(os.path.join("ProjectImages", "OpenBG.jpg"))
+       self.background = pygame.image.load(os.path.join("ProjectImages", "background.jpg"))
        self.background = pygame.transform.smoothscale(self.background, (WIDTH, HEIGHT)) #--> Image dimensions (x,y)
        # Bubble images
        self.bubbles = []

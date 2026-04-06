@@ -4,20 +4,24 @@ import pygame
 
 def page2():
     pygame.init()
-    screen = pygame.display.set_mode((1000, 680))
+    
+    # Define WIDTH & HEIGHT
+    WIDTH, HEIGHT = 1000, 680
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("PAGE 2")
 
-    # --- Load images ---
+    # Define & Load images
     img_page1 = pygame.image.load("ProjectImages/back_button.png")
     img_page3 = pygame.image.load("ProjectImages/next_button.png")
 
-    # Resize if needed
+    # Resize Buttons
     img_page1 = pygame.transform.smoothscale(img_page1, (130, 50))
     img_page3 = pygame.transform.smoothscale(img_page3, (130, 50))
+    
+    # Creating Rects for Clicking events & Positioning Buttons
+    rect_page1 = img_page1.get_rect(bottomleft=(20, HEIGHT - 20))
+    rect_page3 = img_page3.get_rect(bottomright=(WIDTH - 20, HEIGHT - 20))
 
-   # Creating Rects for Clicking events
-    rect_page1 = img_page1.get_rect(topleft=(50, 80))
-    rect_page3 = img_page3.get_rect(topleft=(220, 80))
 
     running = True
     while running:
