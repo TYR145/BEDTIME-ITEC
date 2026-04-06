@@ -188,8 +188,7 @@ class BubbleGame():
 def run():
     game = BubbleGame()
     game.MainLoop()
-    pygame.quit()
-
+    return
 
 if __name__ == "__main__":
     run()

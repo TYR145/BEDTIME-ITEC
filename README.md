@@ -8,12 +8,12 @@ NARRATIVE:
 ---------------------------------------------------------------------------------------
 
 # GAMES PLANNED:
-1. Meal Prep
-2. Race
-3. "Maze"
+1. Meal Prep Memorize
+2. Maze
+3. Race
 4. Bathtime bubble popping
-5. Pyjama Memory Matching
-6. "Who Am I" Guessing Game
+-----5. Pyjama Memory Matching------
+6. "Who Am I" Guessing Game - storybooks
 
 # 6 PAGES + 1 MainStory Page:
 * MainStory = runs all functions on individual pages to "play" the interactive story
@@ -24,3 +24,8 @@ NARRATIVE:
 3. Bathtime == 
     - Only special_bubbles will be clickable (click x amount to "complete" activity)
     - Adjust bubble transparency & keep "special bubble" more opaque
+4. ()
+
+6. "Who Am I" storybook guessing game
+    - pictures of 6 books
+    - clues for every guess --> classic input --> output etc.

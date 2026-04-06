@@ -1,50 +1,56 @@
-from Games.Race import run
+from Games.Maze import run
 import pygame
 
-
 def page2():
-    pygame.init()
-    
-    # Define WIDTH & HEIGHT
+    #pygame.init()
     WIDTH, HEIGHT = 1000, 680
-    screen = pygame.display.set_mode((WIDTH, HEIGHT))
-    pygame.display.set_caption("PAGE 2")
+    #screen = pygame.display.set_mode((WIDTH, HEIGHT)) --> changed, testing
+    screen = pygame.display.get_surface()   #get_surface() uses previous window created!
+    pygame.display.set_caption("PAGE 2 - MAZE")
 
-    # Define & Load images
-    img_page1 = pygame.image.load("ProjectImages/back_button.png")
-    img_page3 = pygame.image.load("ProjectImages/next_button.png")
+    # Load images
+    img_back = pygame.image.load("ProjectImages/back_button.png")
+    img_next = pygame.image.load("ProjectImages/next_button.png")
+    img_game = pygame.image.load("ProjectImages/play_button.png")
 
-    # Resize Buttons
-    img_page1 = pygame.transform.smoothscale(img_page1, (130, 50))
-    img_page3 = pygame.transform.smoothscale(img_page3, (130, 50))
-    
-    # Creating Rects for Clicking events & Positioning Buttons
-    rect_page1 = img_page1.get_rect(bottomleft=(20, HEIGHT - 20))
-    rect_page3 = img_page3.get_rect(bottomright=(WIDTH - 20, HEIGHT - 20))
+    # Resize
+    img_back = pygame.transform.smoothscale(img_back, (130, 50))
+    img_next = pygame.transform.smoothscale(img_next, (130, 50))
+    img_game = pygame.transform.smoothscale(img_game, (130, 50))
 
+    # Positions
+    rect_back = img_back.get_rect(bottomleft=(20, HEIGHT - 20)) #(topleft=(50, 80))
+    rect_next = img_next.get_rect(bottomright=(WIDTH - 20, HEIGHT - 20)) #(topleft=(220, 80))
+    rect_game = img_game.get_rect(topleft=(425, 610))  # centered
 
     running = True
     while running:
         screen.fill((30, 30, 30))
 
-        # Draw image buttons
-        screen.blit(img_page1, rect_page1)
-        screen.blit(img_page3, rect_page3)
+        screen.blit(img_back, rect_back)
+        screen.blit(img_next, rect_next)
+        screen.blit(img_game, rect_game)
+
         pygame.display.update()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
+                #pygame.display.quit()
                 return "quit"
-            
+
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if rect_page1.collidepoint(event.pos):
-                    pygame.quit()
+
+                # Back button
+                if rect_back.collidepoint(event.pos):
                     return "page1"
 
-                if rect_page3.collidepoint(event.pos):
-                    pygame.quit()
+                # Next button
+                if rect_next.collidepoint(event.pos):
                     return "page3"
 
-
-
+                # Play Game button
+                if rect_game.collidepoint(event.pos):
+                    run()                   #--> runs the game
+                    return "page2"          #--> reopen page 2 when game ends
+if __name__ == "__main__":
+    page2()

@@ -2,9 +2,9 @@ import pygame
 
 
 def page1():
-    pygame.init()
+    #pygame.init()
     screen = pygame.display.set_mode((1000, 680))
-    pygame.display.set_caption("PAGE 1")
+    pygame.display.set_caption("PAGE 1 - HOME")
 
     # Home background image - HOME PAGE
     home_img = pygame.image.load("ProjectImages/house_night.jpg")
@@ -29,13 +29,13 @@ def page1():
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.display.quit()
+                #pygame.display.quit()
                 return "quit"
             
             # Checks if MOUSEBUTTONDOWN event happens
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if rect_page2.collidepoint(event.pos):
-                    pygame.display.quit()
+                    #pygame.display.quit()
                     return "page2"
 if __name__ == "__main__":
     page1()

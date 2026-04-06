@@ -2,10 +2,10 @@ from Games.Race import run
 import pygame
 
 def page3():
-    pygame.init()
+    #pygame.init()
     WIDTH, HEIGHT = 1000, 680
-    screen = pygame.display.set_mode((WIDTH, HEIGHT))
-    pygame.display.set_caption("PAGE 3")
+    screen = pygame.display.get_surface()   #get_surface() uses previous window created!
+    pygame.display.set_caption("PAGE 3 - RACE")
 
     # Load images
     img_back = pygame.image.load("ProjectImages/back_button.png")
@@ -34,23 +34,21 @@ def page3():
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.display.quit()
                 return "quit"
 
             if event.type == pygame.MOUSEBUTTONDOWN:
 
                 # Back button
                 if rect_back.collidepoint(event.pos):
-                    pygame.display.quit()
                     return "page2"
 
                 # Next button
                 if rect_next.collidepoint(event.pos):
-                    pygame.display.quit()
                     return "page4"
 
-                # Game button
+                # Play Game button
                 if rect_game.collidepoint(event.pos):
-                    pygame.display.quit()   # close page window
-                    run()                   # launch the game
-                    return "page3"          # reopen this page after game ends
+                    run()                   #--> runs the game
+                    return "page3"          #--> eopen this page after game ends
+if __name__ == "__main__":
+    page3()

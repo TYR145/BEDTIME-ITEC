@@ -5,7 +5,6 @@ import os
 #-------------------------------------------------------------------
 
 def run():
-
     pygame.init()
 
     # SCREEN DIMENSIONSss
@@ -22,7 +21,7 @@ def run():
     # ===========================================================
 
     # Adding BG Images
-    background = pygame.image.load(os.path.join("ProjectImages", "OpenBG.jpg"))
+    background = pygame.image.load(os.path.join("ProjectImages", "background.jpg"))
     background = pygame.transform.smoothscale(background, (WIDTH, HEIGHT))
 
     # ---------------------------------------------------------------------
@@ -128,8 +127,8 @@ def run():
     # Defining Exit Star Image
     eStar = pygame.image.load(os.path.join("ProjectImages", "exit_star.png"))
     eStar = pygame.transform.smoothscale(eStar, (40,40))
-    #Rect --> for collision
-    eStar_rect = eStar.get_rect()
+    # Put the exit star rect somewhere in the maze, e.g. top-right
+    eStar_rect = eStar.get_rect(topleft=(900, 50))
 
 
 
@@ -255,7 +254,7 @@ def run():
                 p_rect.x -= player_dx
                 p_rect.y -= player_dy
 
-        eStar_rect.topleft = (player_x, player_y)
+       # Star appears if Player collected all white circles
         if eStar_visible:
             screen.blit(eStar, eStar_rect)
 
