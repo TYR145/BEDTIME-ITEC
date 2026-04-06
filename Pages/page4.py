@@ -3,7 +3,8 @@ from Games.Bubbles import run
 
 def page4():
     pygame.init()
-    screen = pygame.display.set_mode((1000, 680))
+    WIDTH, HEIGHT = 1000, 680
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("PAGE 4")
 
     # --- Load images ---
@@ -17,9 +18,9 @@ def page4():
     img_play = pygame.transform.smoothscale(img_play, (130, 50))
 
     # Positions (matching Page 2 & 3 layout)
-    rect_back = img_back.get_rect(topleft=(50, 80))
-    rect_next = img_next.get_rect(topleft=(220, 80))
-    rect_play = img_play.get_rect(topleft=(135, 20))  # centered
+    rect_back = img_back.get_rect(bottomleft=(20, HEIGHT - 20))
+    rect_next = img_next.get_rect(bottomright=(WIDTH - 20, HEIGHT - 20))
+    rect_play = img_play.get_rect(topleft=(425, 610))  # centered
 
     running = True
     while running:

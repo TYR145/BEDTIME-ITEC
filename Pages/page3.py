@@ -3,7 +3,8 @@ import pygame
 
 def page3():
     pygame.init()
-    screen = pygame.display.set_mode((1000, 680))
+    WIDTH, HEIGHT = 1000, 680
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("PAGE 3")
 
     # Load images
@@ -17,9 +18,9 @@ def page3():
     img_game = pygame.transform.smoothscale(img_game, (130, 50))
 
     # Positions
-    rect_back = img_back.get_rect(topleft=(50, 80))
-    rect_next = img_next.get_rect(topleft=(220, 80))
-    rect_game = img_game.get_rect(topleft=(135, 20))  # centered
+    rect_back = img_back.get_rect(bottomleft=(20, HEIGHT - 20)) #(topleft=(50, 80))
+    rect_next = img_next.get_rect(bottomright=(WIDTH - 20, HEIGHT - 20)) #(topleft=(220, 80))
+    rect_game = img_game.get_rect(topleft=(425, 610))  # centered
 
     running = True
     while running:
