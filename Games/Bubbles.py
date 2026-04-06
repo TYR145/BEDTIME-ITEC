@@ -45,11 +45,11 @@ class BubbleObject:
             self.image = pygame.transform.smoothscale(self.image, (180, 180)) #--> Image dimensions (x,y)
            
             self.rect = self.image.get_rect(topleft=(x,y))
-            self.speed = random.uniform(0.2, 1) #--> Random speed for each bubble
+            self.speed = random.uniform(0.75, 2) #--> Random speed for each bubble
             self.turn = 1 # detecting Special Bubbles
 
 
-            self.sway = random.uniform(-1, 0.5) #--> Initializing sway variable for horizontal movement (- to + controls VIBRATION)
+            self.sway = random.uniform(-1, 1) #--> Initializing sway variable for horizontal movement (- to + controls VIBRATION)
             self.visibility = None #--> Bubbles starts off fully opaque
        
         def Move(self):
@@ -60,7 +60,7 @@ class BubbleObject:
 
             # Adding Sway
             if random.random() < 0.01:
-                self.sway = random.uniform(-1.5, 1.5)
+                self.sway = random.uniform(-1.5, 2)
 
 
             # Teleporting bubbles to bottom
