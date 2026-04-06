@@ -7,8 +7,8 @@ def page1():
     pygame.display.set_caption("PAGE 1")
 
     # Button Image - "Next"
-    img_page2 = pygame.image.load("ProjectImages/next_button.png")
-    img_page2 = pygame.transform.smoothscale(img_page2, (130, 50)) #--> Image dimensions (x,y)
+    img_page2 = pygame.image.load("ProjectImages/play_button.png")
+    img_page2 = pygame.transform.smoothscale(img_page2, (200, 100)) #--> Image dimensions (x,y)
 
    # Creating Button Rects - for Clicking
     rect_page2 = img_page2.get_rect(topleft=(220, 80))
