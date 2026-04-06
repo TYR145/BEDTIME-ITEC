@@ -147,6 +147,7 @@ def run():
         text_rect = text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
 
         # Draw everything
+
         screen.blit(player_image, p_rect)
         screen.blit(kid_image, kid_rect)
         screen.blit(goal_image, goalP_rect)

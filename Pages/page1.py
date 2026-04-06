@@ -3,21 +3,26 @@ import pygame
 
 def page1():
     pygame.init()
-    screen = pygame.display.set_mode((400, 200))
+    screen = pygame.display.set_mode((1000, 680))
     pygame.display.set_caption("PAGE 1")
+
+    # Home background image - HOME PAGE
+    home_img = pygame.image.load("ProjectImages/house_night.jpg")
+    home_img = pygame.transform.smoothscale(home_img, (1000, 680)) #--> Image dimensions (x,y)
 
     # Button Image - "Next"
     img_page2 = pygame.image.load("ProjectImages/play_button.png")
     img_page2 = pygame.transform.smoothscale(img_page2, (200, 100)) #--> Image dimensions (x,y)
 
-   # Creating Button Rects - for Clicking
-    rect_page2 = img_page2.get_rect(topleft=(220, 80))
+    # Creating Button Rects - for Clicking
+    rect_page2 = img_page2.get_rect(topleft=(420, 400))
 
     # WHILE LOOP - keeps page running until user clicks "Next" or closes window
     running = True
     while running:
-        screen.fill((30, 30, 30)) #--> background colour
-        
+        # Draw Home Screen Background
+        screen.blit(home_img, (0, 0))
+
         # Draw image buttons
         screen.blit(img_page2, rect_page2)
         pygame.display.update()
@@ -32,4 +37,5 @@ def page1():
                 if rect_page2.collidepoint(event.pos):
                     pygame.display.quit()
                     return "page2"
-
+if __name__ == "__main__":
+    page1()

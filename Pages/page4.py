@@ -3,7 +3,7 @@ from Games.Bubbles import run
 
 def page4():
     pygame.init()
-    screen = pygame.display.set_mode((400, 200))
+    screen = pygame.display.set_mode((1000, 680))
     pygame.display.set_caption("PAGE 4")
 
     # --- Load images ---

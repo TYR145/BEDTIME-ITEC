@@ -78,7 +78,7 @@ class BubbleGame():
 
 
         # Creating Game window
-        WIDTH, HEIGHT = 900, 500
+        WIDTH, HEIGHT = 1000, 680
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         self.FPS = 60
         pygame.display.set_caption("Game 3: Bubbles")

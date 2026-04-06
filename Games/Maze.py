@@ -9,7 +9,7 @@ def run():
     pygame.init()
 
     # SCREEN DIMENSIONSss
-    WIDTH, HEIGHT = 650, 450
+    WIDTH, HEIGHT = 1000, 680
     FPS = 60 
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("Maze Mechanics - BETA")

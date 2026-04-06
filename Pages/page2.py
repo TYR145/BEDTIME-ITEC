@@ -4,7 +4,7 @@ import pygame
 
 def page2():
     pygame.init()
-    screen = pygame.display.set_mode((400, 200))
+    screen = pygame.display.set_mode((1000, 680))
     pygame.display.set_caption("PAGE 2")
 
     # --- Load images ---

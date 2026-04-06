@@ -3,7 +3,7 @@ import pygame
 
 def page3():
     pygame.init()
-    screen = pygame.display.set_mode((400, 200))
+    screen = pygame.display.set_mode((1000, 680))
     pygame.display.set_caption("PAGE 3")
 
     # Load images
