@@ -1,31 +1,40 @@
 # BEDTIME-ITEC
-ITEC Group Project
-
+ITEC Group Project: Tessa & Makayla
 NARRATIVE:
-* Baby sitting people
-* Visual novel style --> each room has something
-* Highlighted items to click (?)
+- Baby sitting kid
+- Simple book --> each room has something
+- Play games after reading Instructions
+*highlighted items to trigger event (CUT)
 ---------------------------------------------------------------------------------------
 
 # GAMES PLANNED:
-1. Meal Prep Memorize
-2. Maze
-3. Race
-4. Bathtime bubble popping
------5. Pyjama Memory Matching------
+*Meal Prep Memorize - (CUT)
+2. Race
+3. Maze
+4. Bubble popping
+*Pyjama Memory Matching (CUT)
 6. "Who Am I" Guessing Game - storybooks
 
+
 # 6 PAGES + 1 MainStory Page:
-* MainStory = runs all functions on individual pages to "play" the interactive story
+* MainStory = runs all functions on individual pages to go through the story
     - Introduction
-    - 
-1. Kitchen == Meal Prep minigame
-2. Backyard == 
-3. Bathtime == 
+    - navigate through pages using "Next" & "Back" 
+
+2. Race == race to tire kid out before bed time
+    - avoid obstacles and reach flag first
+    - camera follows player & kid
+
+3. Bubbles == 
     - Only special_bubbles will be clickable (click x amount to "complete" activity)
     - Adjust bubble transparency & keep "special bubble" more opaque
-4. ()
 
-6. "Who Am I" storybook guessing game
+4. Maze == collect 4 toys by following the path
+    - Set path for Player to follow in order to collect toys
+    - 4/4 toys collected --> Kid can go to bed
+
+5. "Who Am I" storybook guessing game
     - pictures of 6 books
     - clues for every guess --> classic input --> output etc.
+    - use clues to guess which book the kid wants
+# >> ----------------------------------------------------------<< #
