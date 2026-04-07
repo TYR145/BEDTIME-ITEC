@@ -12,9 +12,9 @@ class BookObjects:
         def __init__(self, book_ans, book_cover):
             # 
             
-            # defining & loading image
+            # defining & loading image (x,y) dimensions
             self.image = pygame.image.load(os.path.join("ProjectImages", "BooksImages", book_cover)).convert_alpha() #--> .convert_alpha for a transparent PNG (yes)
-            self.image = pygame.transform.smoothscale(self.image, (180, 180)) #--> helps with image clarity
+            self.image = pygame.transform.smoothscale(self.image, (180,250)) #--> helps with image clarity
 
             # Set & store the book to COMPARE to the answer later
             self.answer = book_ans
@@ -39,7 +39,7 @@ class BookGame:
     
         # dEFINE Background image
         self.background = pygame.image.load(os.path.join("ProjectImages", "kidTOYS_img.jpeg"))
-        self.background = pygame.transform.smoothscale(self.background, (WIDTH, HEIGHT)) #--> Image dimensions (x,y)
+        self.background = pygame.transform.smoothscale(self.background, (WIDTH, HEIGHT)) #--> BACKGROUND image dimensions (x,y)
         
         # Create book LIST to initalize & store book objects
         all_books = [
@@ -75,14 +75,13 @@ class BookGame:
     # positioning the books PLACEMENT MANUALLY
     def book_positions(self):
         #--> targets the specific book by index & places it (x,y)
-
-        self.books[0].rect.topleft = (150, 150)
-        self.books[1].rect.topleft = (400, 150)
-        self.books[2].rect.topleft = (650, 150)
+        self.books[0].rect.topleft = (150, 110)
+        self.books[1].rect.topleft = (400, 110)
+        self.books[2].rect.topleft = (650, 110)
 
         # Bottom row (shifted inward to fill the gaps)
-        self.books[3].rect.topleft = (275, 400)
-        self.books[4].rect.topleft = (525, 400)
+        self.books[3].rect.topleft = (275, 410)
+        self.books[4].rect.topleft = (525, 410)
 #>>---------------------------------
 # UPDATE - N/A (no movements)
 #>>----------------------------
