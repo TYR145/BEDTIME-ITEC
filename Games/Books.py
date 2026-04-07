@@ -23,9 +23,9 @@ class BookObjects:
 
     # Create book LIST to initalize & store book objects
     all_books = [
-        Book("Book1", "book1.png"),
-        Book("Book2", "book2.png"),
-        Book("Book3", "book3.png"),
+        Book("Book1", "BooksImages/book1.png"),
+        Book("Book2", "BooksImages/book2.png"),
+        Book("Book3", "BooksImagees/book3.png"),
         Book("Book4", "book4.png"),
         Book("Book5", "book5.png"),
     ]
