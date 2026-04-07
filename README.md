@@ -47,3 +47,4 @@ NARRATIVE:
 3. SAVE on computer ("file" --> "save") 
 4. return to Git Hub Desktop --> check mark square
 5. Left Hand side: TYPE A COMMIT MESSAGE & "Push Origin"
+6. git pull any changes from any device w/ cloned repository
