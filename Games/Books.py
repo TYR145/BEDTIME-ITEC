@@ -11,7 +11,7 @@ class BookObjects:
     class Book: # defining books properties
         def __init__(self, book_ans, book_cover):
             # defining & loading image
-            self.image = pygame.image.load(os.path.join("ProjectImages", "BookImages", book_cover)).convert_alpha() #--> .convert_alpha for a transparent PNG (yes)
+            self.image = pygame.image.load(os.path.join("ProjectImages", "BooksImages", book_cover)).convert_alpha() #--> .convert_alpha for a transparent PNG (yes)
             self.image = pygame.transform.smoothscale(self.image, (180, 180)) #--> helps with image clarity
 
             # Set & store the book to COMPARE to the answer later
