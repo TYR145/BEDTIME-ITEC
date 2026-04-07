@@ -50,21 +50,39 @@ class BookGame:
             BookObjects.Book("Book5", "book5.png"),
         ]
 
-        # Loading Books images!!
-        self.books = all_books  #--> accessing images LIST "Books"
-        
-        # calling book positions functions
+        # Loading Books & Positioning them
+        self.books = all_books  #--> accessing images LIST "Books" 
         self.book_positions() #--> call the positioning function
 
-    # positioning the books PLACEMENT
+        #----------------------------------------------------------
+        # Game Loic VARIABLES
+        #----------------------------------------------------------
+        # randomized answer
+        self.correct_answer = random.choice(["Book1", "Book2", "Book3", "Book4", "Book5"])
+        self.guesses_left = 3
+
+        # Clue responses --> {} is a dictionary, applying a key-value pair (key = Book#, value = Clue)
+        self.clues = {
+            "Book1": "Clue: test#1",
+            "Book2": "Clue: test #2",
+            "Book3": "Clue: test#3",
+            "Book4": "Clue: test#4",
+            "Book5": "Clue: test#5",
+        }
+
+
+
+    # positioning the books PLACEMENT MANUALLY
     def book_positions(self):
-        x = 80 
-        y = 400
+        #--> targets the specific book by index & places it (x,y)
 
-        # targetting book in list, 
-        for book in self.books:
-            book.rect.topleft = (x, y)
+        self.books[0].rect.topleft = (150, 150)
+        self.books[1].rect.topleft = (400, 150)
+        self.books[2].rect.topleft = (650, 150)
 
+        # Bottom row (shifted inward to fill the gaps)
+        self.books[3].rect.topleft = (275, 400)
+        self.books[4].rect.topleft = (525, 400)
 #>>---------------------------------
 # UPDATE - N/A (no movements)
 #>>----------------------------
@@ -81,9 +99,31 @@ while running:
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = pygame.mouse.get_pos()
+
             for book in game.books:
                 if book.rect.collidepoint(mouse_pos):
-                    print("You clicked:", book.answer)
+                    if book.answer == game.correct_answer:
+                        # Guess correctly FIRST TRY
+                        if game.guesses_left == 3:
+                            print(f"It's like you read his mind! {game.correct_answer} was correct!")
+                       
+                        # Guessing correctly after using a guess
+                        else:
+                            print(f"You found it! The right book was {game.correct_answer}!")
+                        running = False   # <-- MUST be here, outside the inner if/else
+
+
+                    # Wrong book clicked --> clues used
+                    else:
+                        game.guesses_left -= 1
+                        print(game.clues.get(book.answer, "No clue available."))
+                        # More than 0 guesses --> tells you have many guesses left
+                        if game.guesses_left > 0:
+                            print(f"Try again! {game.guesses_left} guesses left.")
+                        # Running out of guesses
+                        else:
+                            print("No tries left. Game over.")
+                            running = False   # <-- quit only when guesses hit 0
 
     #---------------------------------
     # DRAW - background & books
@@ -96,5 +136,4 @@ while running:
     pygame.display.update()
     game.clock.tick(game.FPS)
 
-
-## FIX BOOK POSITIONS
+pygame.quit()

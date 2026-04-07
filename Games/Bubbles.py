@@ -10,7 +10,7 @@ class BubbleObject:
     class Bubbles:
         def __init__(self, x, y): #defines bubble properties
             self.visibility = 255 #--> Bubbles starts off fully opaque
-            self.image = pygame.image.load(os.path.join("ProjectImages", "bubble.png")).convert_alpha() #--> transparent images
+            self.image = pygame.image.load(os.path.join("ProjectImages", "bubble.png")).convert_alpha() #--> for handling transpareny in images
             self.image = pygame.transform.smoothscale(self.image, (180, 180)) #--> Image dimensions (x,y)
            
             # Setting image alpha (transparency) for regular bubbles
