@@ -95,3 +95,6 @@ while running:
 
     pygame.display.update()
     game.clock.tick(game.FPS)
+
+
+## FIX BOOK POSITIONS
