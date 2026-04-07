@@ -1,8 +1,43 @@
 import pygame
 import os
+
+"""
+INITIALIZE INTO CLASSES: Hidden Image path in !! M7 - 7.get_pixel !!
+"""
 #-------------------------------------------------------------------
 # INIT(IALIZE)
 #-------------------------------------------------------------------
+# OBJECTS
+"""
+class Toy:
+    def __init__(self, name, img_path, scale, pos):
+        self.name = name
+        self.image = pygame.image.load(os.path.join("ProjectImages", "ToysImages", img_path))
+        self.image = pygame.transform.smoothscale(self.image, scale)
+        self.rect = self.image.get_rect(topleft=pos)
+        self.collected = False
+
+class ToyManager:
+    def __init__(self):
+        self.toys = []
+
+    def add_toy(self, name, img_path, scale, pos):
+        toy = Toy(name, img_path, scale, pos)
+        self.toys.append(toy)
+
+    def draw(self, screen):
+        for toy in self.toys:
+            if not toy.collected:
+                screen.blit(toy.image, toy.rect)
+
+    def check_collision(self, player_rect):
+        for toy in self.toys:
+            if not toy.collected and player_rect.colliderect(toy.rect):
+                toy.collected = True
+                return toy.name  # return which toy was collected
+        return None
+"""
+#-----------------------------------------------------------------------#
 
 def run():
     pygame.init()
@@ -51,12 +86,18 @@ def run():
 
     # Player Rect --> needed for border collision
     p_rect = pygame.Rect(player_x, player_y, player_image.get_width(),player_image.get_height())
+
+    # Encapsulating Toys into a Class --> calling it back
+    toy_manager = ToyManager()
+
+    # Add toys here
+    toy_manager.add_toy("ball", "ball.png", (40,40), (200,150))
+    toy_manager.add_toy("car", "car.png", (50,50), (300,300))
+    toy_manager.add_toy("doll", "doll.png", (45,45), (500,200))
+
     #----------------------------------------------------------------------
 
-
-
-    # OBJECTS
-    
+    """       
     # White Circles - POINTS & RECTS (Will change for individual toys)
     wc1 = pygame.image.load(os.path.join("ProjectImages", "w_circle.png"))
     wc1 = pygame.transform.smoothscale(wc1, (30,30)) #--> DIMENSION SCALING
@@ -74,7 +115,7 @@ def run():
     wc2_rect = pygame.Rect(350,240, wc2.get_width(),wc2.get_height())
     wc3_rect = pygame.Rect(150,370, wc3.get_width(),wc3.get_height())
     wc4_rect = pygame.Rect(550,67, wc4.get_width(),wc4.get_height())
-
+    """
 
     # Defining Obstacles --> Put inside def Function idk....)
     def create_obstacles():
@@ -136,6 +177,12 @@ def run():
     #      GAME LOOP LOGIC
     # ======================
     end = False
+    
+    """
+    collected = toy_manager.check_collision(p_rect)
+    if collected:
+        print("Collected:", collected)
+    """
 
     # White Circles
     wc1_visible = True
