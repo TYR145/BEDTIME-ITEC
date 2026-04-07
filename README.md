@@ -38,3 +38,5 @@ NARRATIVE:
     - clues for every guess --> classic input --> output etc.
     - use clues to guess which book the kid wants
 # >> ----------------------------------------------------------<< #
+
+* Test for git for desk top
