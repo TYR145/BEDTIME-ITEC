@@ -6,82 +6,95 @@ import random
 #---------------------
 # Book Objects
 #---------------------
-class BooksObjects:
-    class Book:
+class BookObjects:
+    
+    class Book: # defining books properties
         def __init__(self, book_ans, book_cover):
-            self.answer = book_ans #--> answer for the book (to be used in quiz)
-            self.image = pygame.image.load(os.path.join("ProjectImages", "BookImages", book_cover)).convert_alpha() #--> helps transparent background load
-            self.image = pygame.transform.smoothscale(self.image, (180, 180))
+            # defining & loading image
+            self.image = pygame.image.load(os.path.join("ProjectImages", "BookImages", book_cover)).convert_alpha() #--> .convert_alpha for a transparent PNG (yes)
+            self.image = pygame.transform.smoothscale(self.image, (180, 180)) #--> helps with image clarity
+
+            # Set & store the book to COMPARE to the answer later
+            self.answer = book_ans
+
+            # create a Rect for clickability
             self.rect = self.image.get_rect()
 
-# Create book LIST to initalize & store book objects
-books = [
-    BooksObjects.Book("Book1", "book1.png"), #--Choosing a book from BooksObject class, and defining its answer & image
-    BooksObjects.Book("Book2", "book2.png"),
-    BooksObjects.Book("Book3", "book3.png"),
-    BooksObjects.Book("Book4", "book4.png"),
-    BooksObjects.Book("Book5", "book5.png"),
-]
 
+    # Create book LIST to initalize & store book objects
+    all_books = [
+        Book("Book1", "book1.png"),
+        Book("Book2", "book2.png"),
+        Book("Book3", "book3.png"),
+        Book("Book4", "book4.png"),
+        Book("Book5", "book5.png"),
+    ]
 
 #>>---------------------------------
 # INIT
 #>>---------------------------------
-class BubbleGame():
+class BookGame:
     def __init__(self):
         pygame.init()
+
+        # Creating Game window
+        WIDTH, HEIGHT = 1000, 680
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        self.FPS = 60
+        pygame.display.set_caption("Page 4: Guessing story Books")
+        self.clock = pygame.time.Clock()
+       
+        # Background image
+        self.background = pygame.image.load(os.path.join("ProjectImages", "kidTOYS_img.jpg"))
+        self.background = pygame.transform.smoothscale(self.background, (WIDTH, HEIGHT)) #--> Image dimensions (x,y)
+
+        # Loading Books images!!
+        self.books = BookObjects.all_books #--> accessing images LIST "Books"
         
-# Method for randomized book answer
-chosen_book = random.choice(books) #--> Randomly selects a book from the list of books
-book_answer = chosen_book.answer #--> STORES THE CHOSEN ANSWER
+        # calling book positions functions
+        self.book_positions() #--> call the positioning function
 
-# Function for guessing the book answer
-def guess_book(chosen_book):
-    correct = chosen_book.answer
+    # positioning the books PLACEMENT
+    def book_positions(self):
+        x = 80 
+        y = 400
 
-    print("Guess the book!")
-    print("Options: Book1, Book2, Book3, Book4, Book5")
-
-    for attempt in range(3):
-        guess = input("Your guess: ")
-
-        if guess.lower() == correct.lower():
-            print("Correct! The book was:", correct)
-            return True
-
-        print("Wrong!")
-
-        # Guess attempt 1 ==> clue 1:
-        if attempt == 0:
-            print("Clue: There's a plant")
-        # Guess attempt 1 ==> clue 1:
-        elif attempt == 1:
-            print("Clue: It has an animal")
-        elif attempt == 2:
-            print("Clue: The cover is pink")
-    
-    print("You lost! The correct answer was:", correct)
-    return False
+        # targetting book in list, 
+        for book in self.books:
+            book.rect.topleft = (x, y)
 
 #>>---------------------------------
-# DRAW: all images
+# UPDATE - N/A (no movements)
+#>>----------------------------
+#---------------------------------
+#  MAIN GAME LOOP
+#---------------------------------
+game = BookGame()
+
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        # Make books clickable
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_pos = pygame.mouse.get_pos() #--> tracks the mouse's position
+
+            for book in game.books: # targetting game var, which is assigned to BookGame() function
+                if book.rect.collidepoint(mouse_pos):
+                    print("You clicked:", book.answer) #--> collidepoint (checks if MOUSE CLICK is inside a rect) vs. colliderect (checks if rects are inside rects)
+
+ #>>---------------------------------
+# DRAW - background & books
 #>>---------------------------------
+# Draw background
+game.screen.blit(game.background, (0, 0))
 
+# Draw books
+for book in game.books:
+    game.screen.blit(book.image, book.rect)
 
+pygame.display.update()
+game.clock.tick(game.FPS)
 
-"""
-# Initializing Pygame
-def run():
-    pygame.init()
-    WIDTH, HEIGHT = 650, 450
-    FPS = 60 
-    screen = pygame.display.set_mode((WIDTH, HEIGHT))
-    pygame.display.set_caption("Book Mechanics - BETA")
-
-#drawing the background + objects 
-    background = pygame.image.load(os.path.join("ProjectImages", "background.jpg"))
-    background = pygame.transform.smoothscale(background, (WIDTH, HEIGHT))
-
-if __name__ == "__main__":
-        run()
-"""
+pygame.quit()
