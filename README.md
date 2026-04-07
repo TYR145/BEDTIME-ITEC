@@ -40,3 +40,10 @@ NARRATIVE:
 # >> ----------------------------------------------------------<< #
 
 * Test for git for desk top
+* Update it worked!
+# STEPS
+1. open cloned repository file on Git Desktop
+2. Edit anything you want tbh
+3. SAVE on computer ("file" --> "save") 
+4. return to Git Hub Desktop --> check mark square
+5. Left Hand side: TYPE A COMMIT MESSAGE & "Push Origin"
