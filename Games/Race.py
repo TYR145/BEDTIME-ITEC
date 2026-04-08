@@ -295,7 +295,7 @@ def run():
             draw()
             pygame.display.flip()
             clock.tick(FPS)
-            draw()
+
     game_loop()
 
     # Quit Pygame
