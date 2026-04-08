@@ -296,8 +296,5 @@ def run():
             clock.tick(FPS)
             draw()
     game_loop()
-
-    # Quit Pygame
-    pygame.quit()
 if __name__ == "__main__":
     run()

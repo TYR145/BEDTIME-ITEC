@@ -1,3 +1,5 @@
+from tkinter import font
+
 import pygame
 import os
 import random
@@ -61,6 +63,9 @@ class BookGame:
         self.correct_answer = random.choice(["Book1", "Book2", "Book3", "Book4", "Book5"])
         self.guesses_left = 3
 
+        # making message's appear
+        self.message = "Click to find which book the kid wants!"
+
         # Clue responses --> {} is a dictionary, applying a key-value pair (key = Book#, value = Clue)
         self.clues = {
             "Book1": "Clue: test#1",
@@ -70,6 +75,38 @@ class BookGame:
             "Book5": "Clue: test#5",
         }
 
+        def get_clue(self, wrong_book):
+            if self.correct_answer == "Book1":
+                return "The kid wants a book with a red cover."
+            elif self.correct_answer == "Book2":
+                return "The kid wants a book with animals."
+            elif self.correct_answer == "Book3":
+                return "The kid wants a book with a spaceship."
+            elif self.correct_answer == "Book4":
+                return "The kid wants a book with a princess."
+            elif self.correct_answer == "Book5":
+                return "The kid wants a book with a dragon."
+
+
+    # Ending screen:
+    def show_message(self, text_string, duration=2000):
+        font = pygame.font.SysFont('Arial', 80)
+        # Render the text
+        text_surface = font.render(text_string, True, (255, 255, 255))
+
+        # Center the text on the screen
+        text_rect = text_surface.get_rect(center=(1000 // 2, 680 // 2))
+
+        # Draw the final frame (background + books)
+        self.screen.blit(self.background, (0, 0))
+        for book in self.books:
+            self.screen.blit(book.image, book.rect)
+
+        # Draw the message centered
+        self.screen.blit(text_surface, text_rect)
+
+        pygame.display.update()
+        pygame.time.delay(duration)
 
 
     # positioning the books PLACEMENT MANUALLY
@@ -82,19 +119,20 @@ class BookGame:
         # Bottom row (shifted inward to fill the gaps)
         self.books[3].rect.topleft = (275, 410)
         self.books[4].rect.topleft = (525, 410)
-#>>---------------------------------
-# UPDATE - N/A (no movements)
-#>>----------------------------
+
+#>>--------UPDATE (N/A: No game movement)-----------
+
 #---------------------------------
 #  MAIN GAME LOOP
 #---------------------------------
 game = BookGame()
 
-running = True
-while running:
+game_over = False
+
+while game_over == False:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
+            game_over = True
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = pygame.mouse.get_pos()
@@ -102,37 +140,36 @@ while running:
             for book in game.books:
                 if book.rect.collidepoint(mouse_pos):
                     if book.answer == game.correct_answer:
-                        # Guess correctly FIRST TRY
                         if game.guesses_left == 3:
-                            print(f"It's like you read his mind! {game.correct_answer} was correct!")
-                       
-                        # Guessing correctly after using a guess
+                            game.message = f"WOW! {game.correct_answer} was correct!"
                         else:
-                            print(f"You found it! The right book was {game.correct_answer}!")
-                        running = False   # <-- MUST be here, outside the inner if/else
-
-
-                    # Wrong book clicked --> clues used
+                            game.message = f"{game.correct_answer} is the right book!"
+                        game_over = True
                     else:
                         game.guesses_left -= 1
-                        print(game.clues.get(book.answer, "No clue available."))
-                        # More than 0 guesses --> tells you have many guesses left
+                        game.message = game.clues.get(book.answer, "No clue available.")
                         if game.guesses_left > 0:
-                            print(f"Try again! {game.guesses_left} guesses left.")
-                        # Running out of guesses
+                            game.message += f" {game.guesses_left} guesses left."
                         else:
-                            print("No tries left. Game over.")
-                            running = False   # <-- quit only when guesses hit 0
+                            game.message = "No tries left. The kid is disappointed."
+                            game_over = True
 
-    #---------------------------------
-    # DRAW - background & books
-    #---------------------------------
+    # DRAW
     game.screen.blit(game.background, (0, 0))
-
     for book in game.books:
         game.screen.blit(book.image, book.rect)
 
-    pygame.display.update()
+    # Draw message during gameplay
+    font = pygame.font.SysFont("Arial", 30)
+    text_surface = font.render(game.message, True, (255, 255, 255))
+    text_rect = text_surface.get_rect(center=(500, 40))
+    game.screen.blit(text_surface, text_rect)
+
+    # Final message
+    if game_over:
+        game.show_message(game.message)
+
+    pygame.display.update()  
     game.clock.tick(game.FPS)
 
-pygame.quit()
+pygame.quit()             
