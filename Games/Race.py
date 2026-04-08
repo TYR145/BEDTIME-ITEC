@@ -292,6 +292,7 @@ def run():
                     screen.blit(obs_image, rect)
             #---------------------------------------------------------------
             # Update the display and cap frame rate
+            draw()
             pygame.display.flip()
             clock.tick(FPS)
             draw()

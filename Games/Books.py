@@ -10,8 +10,6 @@ class BookObjects:
     
     class Book: # defining books properties
         def __init__(self, book_ans, book_cover):
-            # 
-            
             # defining & loading image (x,y) dimensions
             self.image = pygame.image.load(os.path.join("ProjectImages", "BooksImages", book_cover)).convert_alpha() #--> .convert_alpha for a transparent PNG (yes)
             self.image = pygame.transform.smoothscale(self.image, (180,250)) #--> helps with image clarity
@@ -21,7 +19,6 @@ class BookObjects:
 
             # create a Rect for clickability
             self.rect = self.image.get_rect()
-
 
 #>>---------------------------------
 # INIT
@@ -37,10 +34,14 @@ class BookGame:
         pygame.display.set_caption("Game 4: Books Guessing")
         self.clock = pygame.time.Clock()
     
-        # dEFINE Background image
+        # dEFINE Background image (x,y) Dimensions
         self.background = pygame.image.load(os.path.join("ProjectImages", "kidTOYS_img.jpeg"))
-        self.background = pygame.transform.smoothscale(self.background, (WIDTH, HEIGHT)) #--> BACKGROUND image dimensions (x,y)
-        
+        self.background = pygame.transform.smoothscale(self.background, (WIDTH, HEIGHT))
+
+        # making text visible
+        self.message = "" #--> makes anything attached to self.message a string
+        self.font = pygame.font.SysFont(None, 50) #--> font sizing
+    
         # Create book LIST to initalize & store book objects
         all_books = [
             BookObjects.Book("Book1", "book1.png"),
@@ -104,21 +105,24 @@ while running:
                     if book.answer == game.correct_answer:
                         # Guess correctly FIRST TRY
                         if game.guesses_left == 3:
-                            print(f"It's like you read his mind! {game.correct_answer} was correct!")
+                            game.message = f"It's like you read his mind! {game.correct_answer} was correct!"
                        
                         # Guessing correctly after using a guess
                         else:
-                            print(f"You found it! The right book was {game.correct_answer}!")
+                           game.message = f"You found it! The right book was {game.correct_answer}!"
                         running = False   # <-- MUST be here, outside the inner if/else
 
 
                     # Wrong book clicked --> clues used
                     else:
                         game.guesses_left -= 1
-                        print(game.clues.get(book.answer, "No clue available."))
+                        game.message = game.clues.get(book.answer, "No clue available.")
+                        
                         # More than 0 guesses --> tells you have many guesses left
                         if game.guesses_left > 0:
-                            print(f"Try again! {game.guesses_left} guesses left.")
+                            game.message += f" Try again! {game.guesses_left} guesses left." 
+                            #--> += adds "Try again!" to clues
+                        
                         # Running out of guesses
                         else:
                             print("No tries left. Game over.")
@@ -128,11 +132,16 @@ while running:
     # DRAW - background & books
     #---------------------------------
     game.screen.blit(game.background, (0, 0))
-
     for book in game.books:
         game.screen.blit(book.image, book.rect)
 
+   # drawing out the message (anything w/ game.mesge & colours it)
+    text_surface = game.font.render(game.message, True, (255, 255, 255))
+    text_rect = text_surface.get_rect(center=(1000 // 2, 55)) #--> text_surface creates image of text
+                                                              #--> creates a rect of text we can move & center
+    game.screen.blit(text_surface, text_rect) #--> draws the image & centers it
     pygame.display.update()
-    game.clock.tick(game.FPS)
+
+game.clock.tick(game.FPS)
 
 pygame.quit()
