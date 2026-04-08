@@ -1,5 +1,7 @@
-from Games.Race import run
+from Games.Race import RaceGame
+
 import pygame
+
 
 def page3():
     #pygame.init()
@@ -48,7 +50,8 @@ def page3():
 
                 # Play Game button
                 if rect_game.collidepoint(event.pos):
-                    run()                   #--> runs the game
+                    game = RaceGame()
+                    game.run()#--> runs the game
                     return "page3"          #--> eopen this page after game ends
 if __name__ == "__main__":
     page3()
