@@ -3,7 +3,7 @@ import pygame
 def page6():
     
     screen = pygame.display.get_surface()   #get_surface() uses previous window created!
-    pygame.display.set_caption("PAGE 6 - N/A")
+    pygame.display.set_caption("PAGE 6 - END")
 
     WIDTH, HEIGHT = screen.get_size()
 
