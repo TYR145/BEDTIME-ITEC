@@ -1,11 +1,12 @@
 import pygame
-#from Games.Bubbles import run --
+from Games.Books import run
+
 
 def page5():
-    #pygame.init()
+    pygame.init()
     WIDTH, HEIGHT = 1000, 680
-    screen = pygame.display.get_surface()   #get_surface() uses previous window created!
-    pygame.display.set_caption("PAGE 5 - N/A")
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
+    pygame.display.set_caption("PAGE 5 - Books")
 
     # Defining images for buttons (Back, Next, Play)
     img_back = pygame.image.load("ProjectImages/back_button.png")
@@ -50,7 +51,11 @@ def page5():
 
                 # Play Game game
                 if rect_play.collidepoint(event.pos):
-                    #run()                
+                    run() #--> runs the game
+
+                    # restore Page 5 window
+                    screen = pygame.display.set_mode((1000, 680))
+                    pygame.display.set_caption("PAGE 5 - Books")
                     return "page5"      #--> returns to Page 5 when pygame is completed
 if __name__ == "__main__":
     page5()

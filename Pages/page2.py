@@ -4,7 +4,7 @@ import pygame
 def page2():
     #pygame.init()
     WIDTH, HEIGHT = 1000, 680
-    #screen = pygame.display.set_mode((WIDTH, HEIGHT)) --> changed, testing
+    #screen = pygame.display.set_mode((WIDTH, HEIGHT)) #--> changed, testing
     screen = pygame.display.get_surface()   #get_surface() uses previous window created!
     pygame.display.set_caption("PAGE 2 - MAZE")
 
@@ -50,7 +50,13 @@ def page2():
 
                 # Play Game button
                 if rect_game.collidepoint(event.pos):
-                    run()                   #--> runs the game
-                    return "page2"          #--> reopen page 2 when game ends
+                    run()  #--> runs the game
+
+                    # Restore Page 2 window after Maze closes
+                    screen = pygame.display.set_mode((1000, 680))
+                    pygame.display.set_caption("PAGE 2 - MAZE")
+
+                    return "page2" #--> re-opens page 2 when game ends
+
 if __name__ == "__main__":
     page2()

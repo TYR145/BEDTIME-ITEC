@@ -130,6 +130,9 @@ class BubbleGame():
                 self.running = False
                 return
 
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE: 
+                    self.running = False
 
             # Mouse click events: "Pop" bubbles upon click
             elif event.type == pygame.MOUSEBUTTONDOWN:

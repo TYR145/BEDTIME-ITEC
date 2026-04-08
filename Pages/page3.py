@@ -4,9 +4,10 @@ import pygame
 
 
 def page3():
-    #pygame.init()
+    pygame.init()
+    
     WIDTH, HEIGHT = 1000, 680
-    screen = pygame.display.get_surface()   #get_surface() uses previous window created!
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("PAGE 3 - RACE")
 
     # Load images
@@ -50,8 +51,24 @@ def page3():
 
                 # Play Game button
                 if rect_game.collidepoint(event.pos):
-                    game = RaceGame()
-                    game.run()#--> runs the game
-                    return "page3"          #--> eopen this page after game ends
+                    # Create screen + clock for the game
+                    WIDTH, HEIGHT = 990, 550
+                    FPS = 60
+                    game_screen = pygame.display.set_mode((WIDTH, HEIGHT))
+                    game_clock = pygame.time.Clock()
+
+                    # Create and run the RaceGame
+                    game = RaceGame(game_screen, WIDTH, HEIGHT, FPS, game_clock)
+                    game.countdown(3)
+                    game.game_loop()
+
+                    # After the race ends, return to page3
+
+                    # need screen again because Race.py has different window dimensions than MainStory.py
+                    screen = pygame.display.set_mode((1000, 680))
+                    pygame.display.set_caption("PAGE 3 - RACE")
+
+                    return "page3"
+
 if __name__ == "__main__":
     page3()

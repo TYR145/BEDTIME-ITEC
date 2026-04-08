@@ -143,66 +143,66 @@ class BookGame:
         self.books[4].rect.topleft = (525, 410)
 
 
-#>>--------UPDATE (N/A: No game movement)-----------
-
-
 #---------------------------------
 #  MAIN GAME LOOP
 #---------------------------------
-game = BookGame()
+def run():
+    game = BookGame()
 
 
-game_over = False
+    game_over = False
 
 
-while game_over == False:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            game_over = True
+    while game_over == False:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                game_over = True
+
+            #>>--------UPDATE: escape window-----------<<#
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE: 
+                    game_over = True
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
 
 
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            mouse_pos = pygame.mouse.get_pos()
-
-
-            for book in game.books:
-                if book.rect.collidepoint(mouse_pos):
-                    if book.answer == game.correct_answer:
-                        if game.guesses_left == 3:
-                            game.message = f"WOW! {game.correct_answer} was correct!"
-                        else:
-                            game.message = f"{game.correct_answer} is the right book!"
-                        game_over = True
-                    else:
-                        game.guesses_left -= 1
-                        game.message = game.clues.get(book.answer, "No clue available.")
-                        if game.guesses_left > 0:
-                            game.message += f" {game.guesses_left} guesses left."
-                        else:
-                            game.message = "No tries left. The kid is disappointed."
+                for book in game.books:
+                    if book.rect.collidepoint(mouse_pos):
+                        if book.answer == game.correct_answer:
+                            if game.guesses_left == 3:
+                                game.message = f"WOW! {game.correct_answer} was correct!"
+                            else:
+                                game.message = f"{game.correct_answer} is the right book!"
                             game_over = True
+                        else:
+                            game.guesses_left -= 1
+                            game.message = game.clues.get(book.answer, "No clue available.")
+                            if game.guesses_left > 0:
+                                game.message += f" {game.guesses_left} guesses left."
+                            else:
+                                game.message = "No tries left. The kid is disappointed."
+                                game_over = True
 
 
-    # DRAW
-    game.screen.blit(game.background, (0, 0))
-    for book in game.books:
-        game.screen.blit(book.image, book.rect)
+        # DRAW
+        game.screen.blit(game.background, (0, 0))
+        for book in game.books:
+            game.screen.blit(book.image, book.rect)
 
 
-    # Draw message during gameplay
-    font = pygame.font.SysFont("Arial", 30)
-    text_surface = font.render(game.message, True, (255, 255, 255))
-    text_rect = text_surface.get_rect(center=(500, 40))
-    game.screen.blit(text_surface, text_rect)
+        # Draw message during gameplay
+        font = pygame.font.SysFont("Arial", 30)
+        text_surface = font.render(game.message, True, (255, 255, 255))
+        text_rect = text_surface.get_rect(center=(500, 40))
+        game.screen.blit(text_surface, text_rect)
 
 
-    # Final message
-    if game_over:
-        game.show_message(game.message)
+        # Final message
+        if game_over:
+            game.show_message(game.message)
 
 
-    pygame.display.update()  
-    game.clock.tick(game.FPS)
-
-
-pygame.quit()            
+        pygame.display.update()  
+        game.clock.tick(game.FPS)
+    return
