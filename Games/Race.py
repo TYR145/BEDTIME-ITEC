@@ -298,7 +298,25 @@ class RaceGame():
                 draw()
         game_loop()
 
+<<<<<<< HEAD
         # Quit Pygame
         pygame.quit()
     if __name__ == "__main__":
         run()
+=======
+                # Drawing obstacles
+                for obs_image, rect in obstacles:
+                    screen.blit(obs_image, rect)
+            #---------------------------------------------------------------
+            # Update the display and cap frame rate
+            draw()
+            pygame.display.flip()
+            clock.tick(FPS)
+
+    game_loop()
+
+    # Quit Pygame
+    pygame.quit()
+if __name__ == "__main__":
+    run()
+>>>>>>> 2e012fecc07985f97aa418c232299a9372b7eaf6
