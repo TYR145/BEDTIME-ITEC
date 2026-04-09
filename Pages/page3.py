@@ -8,6 +8,13 @@ def page3():
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("PAGE 3 - Bubbles")
 
+    # Loading game instructions
+    instructions = pygame.image.load("ProjectImages/bubbles_instructions.png")
+    instructions = pygame.transform.smoothscale(instructions, (WIDTH, HEIGHT))
+
+    # Resize -- instructions
+    instructions = pygame.transform.smoothscale(instructions, (WIDTH, HEIGHT))  
+
     # Load images
     img_back = pygame.image.load("ProjectImages/back_button.png")
     img_next = pygame.image.load("ProjectImages/next_button.png")
@@ -25,8 +32,7 @@ def page3():
 
     running = True
     while running:
-        screen.fill((30, 30, 30))
-
+        screen.blit(instructions, (0, 0)) #--> drawing instructions image
         screen.blit(img_back, rect_back)
         screen.blit(img_next, rect_next)
         screen.blit(img_game, rect_game)

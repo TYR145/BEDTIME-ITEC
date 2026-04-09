@@ -4,8 +4,16 @@ from Games.Maze import run
 def page4():
     #pygame.init()
     WIDTH, HEIGHT = 1000, 680
-    screen = pygame.display.get_surface()   #get_surface() uses previous window created!
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("PAGE 4 - Maze")
+
+    # Loading game instructions
+    instructions = pygame.image.load("ProjectImages/maze_instructions.png")
+    instructions = pygame.transform.smoothscale(instructions, (WIDTH, HEIGHT))
+
+    # Resize -- instructions
+    instructions = pygame.transform.smoothscale(instructions, (WIDTH, HEIGHT))  
+
 
     # Defining images for buttons (Back, Next, Play)
     img_back = pygame.image.load("ProjectImages/back_button.png")
@@ -24,8 +32,7 @@ def page4():
 
     running = True
     while running:
-        screen.fill((30, 30, 30))
-
+        screen.blit(instructions, (0, 0)) #--> drawing instructions image
         # Draw buttons
         screen.blit(img_back, rect_back)
         screen.blit(img_next, rect_next)

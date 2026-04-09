@@ -7,13 +7,22 @@ def page6():
 
     WIDTH, HEIGHT = screen.get_size()
 
+
+    # Loading game ENDING IMG
+    ending_img = pygame.image.load("ProjectImages/ending_img.png")
+    ending_img = pygame.transform.smoothscale(ending_img, (WIDTH, HEIGHT))
+
+    # Resize -- ENDING IMG
+    ending_img = pygame.transform.smoothscale(ending_img, (WIDTH, HEIGHT))  
+
+
     # defining Button IMAGES
     img_back = pygame.image.load("ProjectImages/back_button.png")
     img_next = pygame.image.load("ProjectImages/next_button.png")
 
 
     font = pygame.font.SysFont("arial", 50)
-    text = font.render("BACK TO HOME", True, (255, 255, 255))
+    text = font.render("You did it!", True, (255, 255, 255))
 
     # Scaling the buttons (x,y) DIMENSIONS !!
     img_back = pygame.transform.smoothscale(img_back, (130, 50))
@@ -21,16 +30,17 @@ def page6():
 
 
     # Button rects to make them clickable
-    rect_back = img_back.get_rect(bottomleft=(20, HEIGHT - 20))
-    rect_next = img_next.get_rect(bottomright=(WIDTH - 20, HEIGHT - 20))
-    rect_text = text.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 50))
+    rect_back = img_back.get_rect(bottomleft=(20, HEIGHT - 20)) #-->"back" button
+    rect_next = img_next.get_rect(bottomright=(WIDTH - 20, HEIGHT - 20)) #--> "next" button (back to page 1)
+
+    rect_text = text.get_rect(center=(WIDTH // 2, HEIGHT - 120)) #--> "You did it!" text
 
 
 
     running = True
     while running:
-        screen.fill((30, 30, 30))
-
+        screen.fill((0, 0, 0)) #--> black background for ending page
+        screen.blit(ending_img, (0, 0)) #--> drawing ending image
         # Drawing the buttons
         screen.blit(img_back, rect_back)
         screen.blit(img_next, rect_next)
