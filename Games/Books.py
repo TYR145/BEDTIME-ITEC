@@ -59,7 +59,7 @@ class BookGame:
         # Game Loic VARIABLES
         #----------------------------------------------------------
         # randomized answer
-        self.correct_answer = "Book2" #ANSWER FOR BOOKS
+        self.correct_answer = "Book4" #ANSWER FOR BOOKS
         self.guesses_left = 3
 
         # making message's appear
@@ -68,10 +68,10 @@ class BookGame:
         # Clue responses --> {} is a dictionary, applying a key-value pair (key = Book#, value = Clue)
         self.clues = {
             "Book1": "Plants are boring. Try again!",
-            "Book2": "The kid likes sheep!",
-            "Book3": "Too creepy, try again!",
-            "Book4": "Why is a bunny in a desert? Try again!",
-            "Book5": "This dog looks weird, try again!",
+            "Book2": "This dog looks weird. Try again!",
+            "Book3": "A bunny in a desert? Try again",
+            "Book4": "The kid likes sheep!",
+            "Book5": "The kid is scared of mice.Try again!",
         }
 
 
@@ -79,7 +79,7 @@ class BookGame:
     def show_message(self, text_string, duration=2000):
         font = pygame.font.SysFont('Arial', 50)
         # Render the text
-        text_surface = font.render(text_string, True, (255, 255, 255))
+        text_surface = font.render(text_string, True, (255, 255, 255)) #--> green text
 
         # Center the text on the screen
         text_rect = text_surface.get_rect(center=(1000 // 2, 680 // 2))
@@ -141,7 +141,7 @@ class BookGame:
                             # Correct book
                             if book.answer == self.correct_answer:
                                 if self.guesses_left == 3:
-                                    self.message = f"WOW! {self.correct_answer} was correct!"
+                                    self.message = f"WOW! {self.correct_answer}, with the sheep was correct!"
                                 else:
                                     self.message = f"{self.correct_answer} is the right book!"
                                 game_over = True
