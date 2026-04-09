@@ -46,7 +46,7 @@ def run():
     WIDTH, HEIGHT = 1000, 680
     FPS = 60 
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
-    pygame.display.set_caption("Maze Mechanics - BETA")
+    pygame.display.set_caption("Game 4: Maze")
     clock = pygame.time.Clock()
 
     # COLOURS
@@ -308,8 +308,7 @@ def run():
         pygame.display.flip()
         clock.tick(FPS)
 
-    pygame.quit()
-    return "win"
+    return
 
 if __name__ == "__main__":
     run()

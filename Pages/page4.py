@@ -1,11 +1,11 @@
 import pygame
-from Games.Bubbles import run
+from Games.Maze import run
 
 def page4():
     #pygame.init()
     WIDTH, HEIGHT = 1000, 680
     screen = pygame.display.get_surface()   #get_surface() uses previous window created!
-    pygame.display.set_caption("PAGE 4 - BUBBLES")
+    pygame.display.set_caption("PAGE 4 - Maze")
 
     # Defining images for buttons (Back, Next, Play)
     img_back = pygame.image.load("ProjectImages/back_button.png")
@@ -37,6 +37,11 @@ def page4():
             if event.type == pygame.QUIT:
                 #pygame.display.quit()
                 return "quit"
+            
+            # Escape key exits game window
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    return "page4"
 
             if event.type == pygame.MOUSEBUTTONDOWN:
 

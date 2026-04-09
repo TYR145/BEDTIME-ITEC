@@ -1,12 +1,12 @@
-from Games.Maze import run
 import pygame
+from Games.Race import run
 
 def page2():
     #pygame.init()
     WIDTH, HEIGHT = 1000, 680
     #screen = pygame.display.set_mode((WIDTH, HEIGHT)) #--> changed, testing
     screen = pygame.display.get_surface()   #get_surface() uses previous window created!
-    pygame.display.set_caption("PAGE 2 - MAZE")
+    pygame.display.set_caption("PAGE 2 - Race")
 
     # Load images
     img_back = pygame.image.load("ProjectImages/back_button.png")
@@ -52,9 +52,9 @@ def page2():
                 if rect_game.collidepoint(event.pos):
                     run()  #--> runs the game
 
-                    # Restore Page 2 window after Maze closes
+                    # Restore Page 2 window after Race closes
                     screen = pygame.display.set_mode((1000, 680))
-                    pygame.display.set_caption("PAGE 2 - MAZE")
+                    pygame.display.set_caption("PAGE 2 - Race")
 
                     return "page2" #--> re-opens page 2 when game ends
 
