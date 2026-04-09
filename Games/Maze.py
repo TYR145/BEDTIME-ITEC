@@ -269,7 +269,7 @@ class MazeGame:
 
 
 #-----------------------------------------
-# run() wrapper (like Bubbles)
+# run() wrapper
 #-----------------------------------------
 def run():
     game = MazeGame()
